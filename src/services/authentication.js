@@ -61,11 +61,11 @@ export default class authentication {
     }
     getRole() {
         // Since, the attributes differs in dev and prod keycloak instance, please uncomment these lines for development only
-        let clientId = this.getClientId();
-        let clientRoles = this.decodeAccessToken().resource_access[clientId].roles;
+        //let clientId = this.getClientId();
+        //let clientRoles = this.decodeAccessToken().resource_access[clientId].roles;
 
         // please uncomment this line for production only
-        //let clientRoles = this.decodeAccessToken().companyRole;                          
+        let clientRoles = this.decodeAccessToken().companyRole;                          
 
         return clientRoles.length == 1 ? clientRoles[0] : clientRoles;
     }
