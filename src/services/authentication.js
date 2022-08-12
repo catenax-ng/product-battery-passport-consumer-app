@@ -5,10 +5,10 @@ import Keycloak from 'keycloak-js'
 export default class authentication {
 
     keycloak;
-    constructor(){
+    constructor() {
         this.keycloak = new Keycloak(INIT_OPTIONS)
     }
-    keycloakInit(app){
+    keycloakInit(app) {
         this.keycloak.init({ onLoad: INIT_OPTIONS.onLoad }).then((auth) => {
             if (!auth) {
                 window.location.reload();
@@ -18,20 +18,20 @@ export default class authentication {
             }
             //Token Refresh
             setInterval(() => {
-            this.updateToken(60)
+                this.updateToken(60)
             }, 60000)
-        
+
         }).catch((e) => {
             console.log(e)
             console.log('Login Failure')
         });
     }
     getAccessToken() {
-        return  this.keycloak.token;
+        return this.keycloak.token;
     }
 
     getRefreshedToken() {
-        return  this.keycloak.refreshToken;
+        return this.keycloak.refreshToken;
     }
 
     updateToken(minimumValidity) {
@@ -40,7 +40,7 @@ export default class authentication {
                 console.info('Token refreshed' + refreshed);
             } else {
                 console.warn('Token not refreshed, valid for '
-                    + Math.round( this.keycloak.tokenParsed.exp +  this.keycloak.timeSkew - new Date().getTime() / 1000) + ' seconds');
+                    + Math.round(this.keycloak.tokenParsed.exp + this.keycloak.timeSkew - new Date().getTime() / 1000) + ' seconds');
             }
         }).catch(() => {
             console.error('Failed to refresh token');
@@ -48,19 +48,25 @@ export default class authentication {
     }
 
     isUserAuthenticated() {
-        return  this.keycloak.authenticated;
+        return this.keycloak.authenticated;
     }
     getClientId() {
-        return  this.keycloak.clientId;
+        return this.keycloak.clientId;
     }
     decodeAccessToken() {
-        return JSON.parse(window.atob( this.keycloak.token.split(".")[1]));
+        return JSON.parse(window.atob(this.keycloak.token.split(".")[1]));
     }
     getUserName() {
         return this.decodeAccessToken().preferred_username;
     }
     getRole() {
-        let clientRoles = this.decodeAccessToken().companyRole;
+        // Since, the attributes differs in dev and prod keycloak instance, please uncomment these lines for development only
+        let clientId = this.getClientId();
+        let clientRoles = this.decodeAccessToken().resource_access[clientId].roles;
+
+        // please uncomment this line for production only
+        //let clientRoles = this.decodeAccessToken().companyRole;                          
+
         return clientRoles.length == 1 ? clientRoles[0] : clientRoles;
     }
     logout() {
