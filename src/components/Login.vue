@@ -1,32 +1,67 @@
 <template>
   <div class="sign-in-page-container">
-    <img :src="LogoBG" alt="logo" class="bg-logo" />
+    <img
+      :src="LogoBG"
+      alt="logo"
+      class="bg-logo"
+    >
     <div class="logo-container">
-      <img :src="CatenaLogo" alt="logo" class="logo" />
+      <img
+        :src="CatenaLogo"
+        alt="logo"
+        class="logo"
+      >
     </div>
     <div class="sign-in-wrapper">
-      <div class="sign-in-container" data-cy="sign-in-container">
-        <div class="sign-in-title">Sign In</div>
+      <div
+        class="sign-in-container"
+        data-cy="sign-in-container"
+      >
+        <div class="sign-in-title">
+          Sign In
+        </div>
         <div class="new-user-title">
           <span>New user?</span>
-          <router-link to="/sign-up" class="sign-up">Sign Up</router-link>
+          <router-link
+            to="/sign-up"
+            class="sign-up"
+          >
+            Sign Up
+          </router-link>
         </div>
         <div class="col-md-4">
-          <input class="form-control input" v-model="email" type="text" placeholder="Username or email"
-            data-cy="email-input" />
+          <input
+            v-model="email"
+            class="form-control input"
+            type="text"
+            placeholder="Username or email"
+            data-cy="email-input"
+          >
         </div>
         <div class="col-md-4">
-          <input class="form-control input" v-model="password" type="password" placeholder="Password"
-            data-cy="password-input" />
+          <input
+            v-model="password"
+            class="form-control input"
+            type="password"
+            placeholder="Password"
+            data-cy="password-input"
+          >
         </div>
         <div class="col-md-4">
-          <button class="btn btn-success btn-login" v-on:click="login" data-cy="sign-in-btn">
+          <button
+            class="btn btn-success btn-login"
+            data-cy="sign-in-btn"
+            @click="login"
+          >
             Sign In
           </button>
         </div>
         <div>
           <span>
-            <router-link to="#" class="public-data">See public data</router-link>
+            <router-link
+              to="#"
+              class="public-data"
+            >See public data</router-link>
           </span>
           <!-- <span>
               <router-link to="/api/scanpassport"
@@ -48,36 +83,10 @@ import { MOCK_AUTH_URL } from "@/services/service.const";
 
 export default {
   name: "LoginPage",
-  components: {
-    CatenaLogo,
-    LogoBG
-  },
   setup() {
     return {
       CatenaLogo, LogoBG
     };
-  },
-  methods: {
-    async login() {
-
-      let result = await axios.get(`${MOCK_AUTH_URL}/users?email=${this.$store.state.email}&password=${this.$store.state.password}`);
-      if (result.status === 200 && result.data.length > 0) {
-
-        //alert("login successful..!")
-        localStorage.setItem("user-info", JSON.stringify(result.data[0]));
-        if (localStorage.getItem("QRCode-info")) {
-          const isAccessUsingQRCode = localStorage.getItem("QRCode-info")
-
-          let query = { "provider": JSON.parse(isAccessUsingQRCode).provider, "battery": JSON.parse(isAccessUsingQRCode).battery }
-          this.$router.push({ name: "Home", query: query });
-        }
-        else
-          this.$router.push({ name: "Home" });
-      }
-      else {
-        alert("user is not registered or invalid credentails..!")
-      }
-    },
   },
   computed: {
     email: {
@@ -101,6 +110,28 @@ export default {
     if (user) {
       this.$router.push({ name: "Home" });
     }
+  },
+  methods: {
+    async login() {
+
+      let result = await axios.get(`${MOCK_AUTH_URL}/users?email=${this.$store.state.email}&password=${this.$store.state.password}`);
+      if (result.status === 200 && result.data.length > 0) {
+
+        //alert("login successful..!")
+        localStorage.setItem("user-info", JSON.stringify(result.data[0]));
+        if (localStorage.getItem("QRCode-info")) {
+          const isAccessUsingQRCode = localStorage.getItem("QRCode-info")
+
+          let query = { "provider": JSON.parse(isAccessUsingQRCode).provider, "battery": JSON.parse(isAccessUsingQRCode).battery }
+          this.$router.push({ name: "Home", query: query });
+        }
+        else
+          this.$router.push({ name: "Home" });
+      }
+      else {
+        alert("user is not registered or invalid credentails..!")
+      }
+    },
   },
 };
 </script>

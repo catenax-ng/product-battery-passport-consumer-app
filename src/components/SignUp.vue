@@ -1,60 +1,96 @@
 <template>
   <div class="bg">
-    <img class="logo" src="../assets/catenaX-logo.png" style="margin-left: 45%"/>
-    <br/>
+    <img
+      class="logo"
+      src="../assets/catenaX-logo.png"
+      style="margin-left: 45%"
+    >
+    <br>
     <div class="margin-top">
-      <p class="h1" style="margin-left: 49%; font-weight: bolder; font-size: x-large;">Sign Up</p>
+      <p
+        class="h1"
+        style="margin-left: 49%; font-weight: bolder; font-size: x-large;"
+      >
+        Sign Up
+      </p>
     </div>
     <div class="margin-top">
       <div class="container">
         <div class="col-md-4 center">
-          <select v-model="role" class="form-select textbox">
-            <option disabled selected value="">Select Role..</option>
-            <option value="oem">OEM</option>
-            <option value="rawMaterialSupplier">Raw Material Supplier</option>
-            <option value="recycler">Recycler</option>
-            <option value="manufacturer">Manufacturer</option>
-            <option value="producer">Producer</option>
-            <option value="dismentler">Dismentler</option>
+          <select
+            v-model="role"
+            class="form-select textbox"
+          >
+            <option
+              disabled
+              selected
+              value=""
+            >
+              Select Role..
+            </option>
+            <option value="oem">
+              OEM
+            </option>
+            <option value="rawMaterialSupplier">
+              Raw Material Supplier
+            </option>
+            <option value="recycler">
+              Recycler
+            </option>
+            <option value="manufacturer">
+              Manufacturer
+            </option>
+            <option value="producer">
+              Producer
+            </option>
+            <option value="dismentler">
+              Dismentler
+            </option>
           </select>
         </div>
-        <br/>
+        <br>
         <div class="col-md-4 center">
           <input
-              v-model="name"
-              class="form-control textbox"
-              placeholder="Enter Name"
-              type="text"
-          />
+            v-model="name"
+            class="form-control textbox"
+            placeholder="Enter Name"
+            type="text"
+          >
         </div>
-        <br/>
+        <br>
         <div class="col-md-4 center">
           <input
-              v-model="email"
-              class="form-control textbox"
-              placeholder="Enter Email"
-              type="text"
-          />
+            v-model="email"
+            class="form-control textbox"
+            placeholder="Enter Email"
+            type="text"
+          >
         </div>
-        <br/>
+        <br>
         <div class="col-md-4 center">
           <input
-              v-model="password"
-              class="form-control textbox"
-              placeholder="Enter Password"
-              type="password"
-          />
+            v-model="password"
+            class="form-control textbox"
+            placeholder="Enter Password"
+            type="password"
+          >
         </div>
-        <br/>
+        <br>
         <div class="col-md-4 center">
-          <button class="btn btn-success btn-signup" v-on:click="signUp">
+          <button
+            class="btn btn-success btn-signup"
+            @click="signUp"
+          >
             Sign Up
           </button>
         </div>
-        <br/>
+        <br>
         <div class="col-md-4 center">
           <p>
-            <span> <router-link style="margin-left:13%" to="/login">Already a User?</router-link></span>
+            <span> <router-link
+              style="margin-left:13%"
+              to="/login"
+            >Already a User?</router-link></span>
           </p>
         </div>
       </div>
@@ -76,6 +112,12 @@ export default {
       password: "",
     };
   },
+  mounted() {
+    let user = localStorage.getItem("user-info");
+    if (user) {
+      this.$router.push({name: "Home"});
+    }
+  },
   methods: {
     async signUp() {
       let result = await axios.post(`${DUMMY_SERVICE}/users`, {
@@ -90,12 +132,6 @@ export default {
         await this.$router.push({name: "Home"});
       }
     },
-  },
-  mounted() {
-    let user = localStorage.getItem("user-info");
-    if (user) {
-      this.$router.push({name: "Home"});
-    }
   },
 };
 </script>

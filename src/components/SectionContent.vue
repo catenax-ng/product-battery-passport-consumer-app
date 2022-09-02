@@ -1,14 +1,16 @@
 <template>
-  <div className="section-content">{{ children }}</div>
+  <div className="section-content">
+    {{ children }}
+  </div>
 </template>
 
 <script>
 export default {
   name: "SectionContent",
+  components: {},
   props: {
     children: String,
   },
-  components: {},
 };
 </script>
 

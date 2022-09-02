@@ -2,12 +2,22 @@
   <div class="footer-container">
     <div class="footer-wrapper">
       <div class="logo-wrapper">
-        <img :src="CatenaLogo" alt="logo" class="logo"/>
+        <img
+          :src="CatenaLogo"
+          alt="logo"
+          class="logo"
+        >
       </div>
       <div class="links-wrapper">
-        <h3 class="buttons">Contact</h3>
-        <h3 class="buttons">Legal Notice</h3>
-        <h3 class="buttons">Privacy Policy</h3>
+        <h3 class="buttons">
+          Contact
+        </h3>
+        <h3 class="buttons">
+          Legal Notice
+        </h3>
+        <h3 class="buttons">
+          Privacy Policy
+        </h3>
       </div>
     </div>
   </div>

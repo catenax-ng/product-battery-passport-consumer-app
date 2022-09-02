@@ -1,59 +1,76 @@
 <template>
-  <img class="logo" src="../assets/catenaX-logo.png" style="margin-top:150px"/>
-  <br/>
+  <img
+    class="logo"
+    src="../assets/catenaX-logo.png"
+    style="margin-top:150px"
+  >
+  <br>
   <div class="margin-top">
-    <p class="h4">Scan Battery Passport</p>
+    <p class="h4">
+      Scan Battery Passport
+    </p>
   </div>
-  <br/>
+  <br>
   <div>
-    <img height="200" src="../assets/QR.png" width="200"/>
+    <img
+      height="200"
+      src="../assets/QR.png"
+      width="200"
+    >
   </div>
-  <div class="margin-top" hidden>
+  <div
+    class="margin-top"
+    hidden
+  >
     <div class="container">
       <div class="col-md-4 center">
         <input
-            v-model="host"
-            class="form-control"
-            placeholder="http://host:port"
-            type="text"
-        />
+          v-model="host"
+          class="form-control"
+          placeholder="http://host:port"
+          type="text"
+        >
       </div>
-      <br/>
+      <br>
       <div class="col-md-4 center">
         <input
-            v-model="provider"
-            class="form-control"
-            placeholder="Battery Provider"
-            type="text"
-        />
+          v-model="provider"
+          class="form-control"
+          placeholder="Battery Provider"
+          type="text"
+        >
       </div>
-      <br/>
+      <br>
       <div class="col-md-4 center">
         <input
-            v-model="batteryNumber"
-            class="form-control"
-            placeholder="Battery Number"
-            type="text"
-        />
+          v-model="batteryNumber"
+          class="form-control"
+          placeholder="Battery Number"
+          type="text"
+        >
       </div>
-      <br/>
+      <br>
 
       <div class="col-md-4 center">
-        <button class="btn btn-success btn-signup" v-on:click="generateQRCode">
+        <button
+          class="btn btn-success btn-signup"
+          @click="generateQRCode"
+        >
           Generate QR code
         </button>
       </div>
       <div>
-        <img :src=generatedQrCodeUrl
-        />
+        <img :src="generatedQrCodeUrl">
       </div>
 
       <div>
-        <button class="btn btn-success btn-signup" v-on:click="redirect">
+        <button
+          class="btn btn-success btn-signup"
+          @click="redirect"
+        >
           Get access
         </button>
       </div>
-
     </div>
   </div>
 </template>
@@ -63,8 +80,8 @@
 import {GOOGLE_CHART_API_URL} from "@/services/service.const";
 
 export default {
-  components: {},
   name: "ScanPassport",
+  components: {},
   data() {
     return {
       host: '',

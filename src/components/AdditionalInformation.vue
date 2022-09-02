@@ -1,6 +1,5 @@
 <template v-if="additionalInformation">
   <SectionHeader title="8. Additional information" />
-
   <div class="section-content">
     <div class="sub-section-container longer">
       <a
@@ -16,26 +15,27 @@
         }}</span>
       </a>
       <div
-        class="field-container"
         v-if="
           additionalInformation
             .symbolIndicatingSeparateCollectionAndHeavyMetalContent.value
         "
+        class="field-container"
       >
-        <span class="field-label"
-          >Symbol indicating ‘separate collection’ and heavy metal content
+        <span class="field-label">Symbol indicating ‘separate collection’ and heavy metal content
         </span>
-        <img :src="Trashcan" alt="profile" class="icon" />
-
+        <img
+          :src="Trashcan"
+          alt="profile"
+          class="icon"
+        >
         <span class="field-value">{{
           additionalInformation
             .symbolIndicatingSeparateCollectionAndHeavyMetalContent.value
         }}</span>
       </div>
-
       <div class="field-container">
-        <span class="field-label"></span>
-        <span class="field-value"></span>
+        <span class="field-label" />
+        <span class="field-value" />
       </div>
       <a
         v-if="additionalInformation.carbonFootprintDeclaration.url"
@@ -48,24 +48,21 @@
           additionalInformation.carbonFootprintDeclaration.value
         }}</span>
       </a>
-
       <Field
         label="Carbon Footprint Performance Class"
-        v-bind:value="
+        :value="
           additionalInformation.carbonFootprintPerformanceClass.value
         "
       />
       <div
-        class="list-container"
         v-if="additionalInformation.hazardousSubstancesContainedInTheBattery"
+        class="list-container"
       >
         <ul>
-          <span class="list-label"
-            >Hazardous substances contained in the battery</span
-          >
+          <span class="list-label">Hazardous substances contained in the battery</span>
           <li
-            :key="substances"
             v-for="substances in additionalInformation.hazardousSubstancesContainedInTheBattery"
+            :key="substances"
           >
             {{ substances }}
           </li>
@@ -99,21 +96,28 @@
 
 <script>
 import SectionHeader from "./SectionHeader.vue";
-import SectionContent from "./SectionContent.vue";
 import Trashcan from "@/assets/trashcan.svg";
 import Field from "./Field.vue";
 
 export default {
   name: "AdditionalInformation",
-  props: {
-    sectionTitle: String,
-    additionalInformation: {},
-  },
   components: {
     Field,
     SectionHeader,
-    SectionContent,
   },
+  props: {
+    sectionTitle: {
+      type: [String, Number, null],
+      required: false,
+      default: ""
+    },
+    additionalInformation: {
+      type: {},
+      required: false,
+      default: ""
+    },
+  },
+
   setup() {
     return {
       Trashcan,

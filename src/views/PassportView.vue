@@ -1,21 +1,44 @@
 <template>
-  <Spinner v-if="loading" class="spinner-container" />
+  <Spinner
+    v-if="loading"
+    class="spinner-container"
+  />
   <div v-else>
-    <Header :batteryId="data.generalInformation" />
+    <Header :battery-id="data.generalInformation" />
     <div class="pass-container">
-      <GeneralInformation sectionTitle="General information" :generalInformation="data.generalInformation" />
-      <BatteryComposition sectionTitle="Battery Composition" :batteryComposition="data.batteryComposition" />
-      <StateOfHealth sectionTitle="State of Health" :stateOfHealth="data.stateOfHealth" />
-      <ParametersOfTheBattery sectionTitle="Parameters of The Battery"
-        :parametersOfTheBattery="data.parametersOfTheBattery" />
-      <DismantlingProcedures sectionTitle="Dismantling procedures"
-        :dismantlingProcedures="data.dismantlingProcedures" />
-      <SafetyInformation sectionTitle="Safety information" :safetyMeasures="data.safetyMeasures" />
-      <InformationResponsibleSourcing sectionTitle="Information responsible sourcing"
-        :informationResponsibleSourcing="data.informationResponsibleSourcing" />
+      <GeneralInformation
+        section-title="General information"
+        :general-information="data.generalInformation"
+      />
+      <BatteryComposition
+        section-title="Battery Composition"
+        :battery-composition="data.batteryComposition"
+      />
+      <StateOfHealth
+        section-title="State of Health"
+        :state-of-health="data.stateOfHealth"
+      />
+      <ParametersOfTheBattery
+        section-title="Parameters of The Battery"
+        :parameters-of-the-battery="data.parametersOfTheBattery"
+      />
+      <DismantlingProcedures
+        section-title="Dismantling procedures"
+        :dismantling-procedures="data.dismantlingProcedures"
+      />
+      <SafetyInformation
+        section-title="Safety information"
+        :safety-measures="data.safetyMeasures"
+      />
+      <InformationResponsibleSourcing
+        section-title="Information responsible sourcing"
+        :information-responsible-sourcing="data.informationResponsibleSourcing"
+      />
 
-      <AdditionalInformation sectionTitle="Additional information"
-        :additionalInformation="data.additionalInformation" />
+      <AdditionalInformation
+        section-title="Additional information"
+        :additional-information="data.additionalInformation"
+      />
     </div>
     <Footer />
   </div>
@@ -36,7 +59,6 @@ import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 import axios from "axios";
 import { AAS_PROXY_URL } from "@/services/service.const";
-import { BASE_URL } from "@/services/service.const";
 import { inject } from 'vue'
 
 export default {
@@ -62,6 +84,11 @@ export default {
       loading: true,
       errors: [],
     };
+  },
+  async created() {
+    let assetIds = this.$route.params.assetIds;
+    this.data = await this.getPassport(assetIds);
+    this.loading = false;
   },
   methods: {
     getDigitalTwinId: function (assetIds) {
@@ -124,11 +151,6 @@ export default {
       const response = await this.getSubmodelData(digitalTwin);
       return response;
     },
-  },
-  async created() {
-    let assetIds = this.$route.params.assetIds;
-    this.data = await this.getPassport(assetIds);
-    this.loading = false;
   },
 };
 </script>

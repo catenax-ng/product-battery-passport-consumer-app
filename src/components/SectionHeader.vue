@@ -7,10 +7,14 @@
 <script>
 export default {
   name: "SectionHeader",
-  props: {
-    title: String,
-  },
   components: {},
+  props: {
+    title: {
+      type: [String],
+      required: false,
+      default: ""
+    },
+  },
 };
 </script>
 

@@ -1,31 +1,46 @@
 <template>
   <div class="header-container">
-    <img :src="CatenaLogo" alt="logo" class="logo"/>
-    <img :src="Settings" alt="settings" class="buttons" title="Settings"/>
     <img
-        :src="Notifications"
-        alt="Notifications"
-        class="buttons"
-        title="Notifications"
-    />
+      :src="CatenaLogo"
+      alt="logo"
+      class="logo"
+    >
+    <img
+      :src="Settings"
+      alt="settings"
+      class="buttons"
+      title="Settings"
+    >
+    <img
+      :src="Notifications"
+      alt="Notifications"
+      class="buttons"
+      title="Notifications"
+    >
 
     <div>
-      <span @mouseleave="hover = false" @mouseover="hover = true">
+      <span
+        @mouseleave="hover = false"
+        @mouseover="hover = true"
+      >
         <img
-            :src="Profile"
-            alt="profile"
-            class="buttons"
-            title="User profile"
-        />
+          :src="Profile"
+          alt="profile"
+          class="buttons"
+          title="User profile"
+        >
       </span>
-      <div v-if="hover" class="profile-menu">
+      <div
+        v-if="hover"
+        class="profile-menu"
+      >
         <img
-            :src="Logout"
-            alt="logout"
-            class="buttons"
-            title="Logout"
-            v-on:click="logout"
-        />
+          :src="Logout"
+          alt="logout"
+          class="buttons"
+          title="Logout"
+          @click="logout"
+        >
       </div>
     </div>
   </div>
@@ -41,11 +56,6 @@ import Logout from "../assets/logout.png";
 export default {
   name: "NavigationComponent",
   components: {},
-  data() {
-    return {
-      hover: false,
-    };
-  },
   setup() {
     return {
       CatenaLogo,
@@ -55,6 +65,18 @@ export default {
       Logout,
     };
   },
+  data() {
+    return {
+      hover: false,
+    };
+  },
+  mounted() {
+    let user = localStorage.getItem("user-info");
+    if (user) {
+      this.username = JSON.parse(user).name;
+      this.role = JSON.parse(user).role;
+    }
+  },
   methods: {
     logout() {
       localStorage.clear();
@@ -63,13 +85,6 @@ export default {
     scanQRCode() {
       this.$router.push({name: "ScanPassport"});
     },
-  },
-  mounted() {
-    let user = localStorage.getItem("user-info");
-    if (user) {
-      this.username = JSON.parse(user).name;
-      this.role = JSON.parse(user).role;
-    }
   },
 };
 </script>

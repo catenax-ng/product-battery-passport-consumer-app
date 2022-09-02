@@ -13,7 +13,11 @@
         class="field-container"
         data-cy="occupational-safety"
       >
-        <img :src="Pdf" alt="settings" class="icon" />
+        <img
+          :src="Pdf"
+          alt="settings"
+          class="icon"
+        >
         <span class="field-value">{{
           safetyMeasures.occupationalSafety.value
         }}</span>
@@ -24,7 +28,11 @@
         target="_blank"
         class="field-container"
       >
-        <img :src="Pdf" alt="settings" class="icon" />
+        <img
+          :src="Pdf"
+          alt="settings"
+          class="icon"
+        >
         <span class="field-value">{{
           safetyMeasures.fireProtection.value
         }}</span>
@@ -35,7 +43,11 @@
         target="_blank"
         class="field-container"
       >
-        <img :src="Pdf" alt="settings" class="icon" />
+        <img
+          :src="Pdf"
+          alt="settings"
+          class="icon"
+        >
         <span class="field-value">{{
           safetyMeasures.usableExtinguishingAgent.value
         }}</span>
@@ -51,7 +63,11 @@
         target="_blank"
         class="field-container"
       >
-        <img :src="Pdf" alt="settings" class="icon" />
+        <img
+          :src="Pdf"
+          alt="settings"
+          class="icon"
+        >
         <span class="field-value">{{
           safetyMeasures.instructionsForSafelyPackagingBatteries.value
         }}</span>
@@ -67,7 +83,11 @@
         target="_blank"
         class="field-container"
       >
-        <img :src="Pdf" alt="settings" class="icon" />
+        <img
+          :src="Pdf"
+          alt="settings"
+          class="icon"
+        >
         <span class="field-value">{{
           safetyMeasures.instructionsForSafelyTransportingBatteries.value
         }}</span>
@@ -78,18 +98,16 @@
 
 <script>
 import SectionHeader from "./SectionHeader.vue";
-import SectionContent from "./SectionContent.vue";
 import Pdf from "../assets/pdf.svg";
 
 export default {
-  name: "safetyMeasures",
+  name: "SafetyMeasures",
+  components: {
+    SectionHeader,
+  },
   props: {
     sectionTitle: String,
     safetyMeasures: {},
-  },
-  components: {
-    SectionHeader,
-    SectionContent,
   },
   setup() {
     return {

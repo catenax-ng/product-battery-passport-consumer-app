@@ -1,17 +1,21 @@
 <template>
-  <SectionHeader title="7. Information responsible sourcing"/>
+  <SectionHeader title="7. Information responsible sourcing" />
 
   <div class="section-content">
     <div class="sub-section-container">
       <a
-          :href="informationResponsibleSourcing.responsibleRawMaterialsReport.url"
-          class="field-container"
-          target="_blank"
+        :href="informationResponsibleSourcing.responsibleRawMaterialsReport.url"
+        class="field-container"
+        target="_blank"
       >
-        <img :src="Pdf" alt="settings" class="icon"/>
+        <img
+          :src="Pdf"
+          alt="settings"
+          class="icon"
+        >
         <span class="field-value">{{
-            informationResponsibleSourcing.responsibleRawMaterialsReport.value
-          }}</span>
+          informationResponsibleSourcing.responsibleRawMaterialsReport.value
+        }}</span>
       </a>
     </div>
   </div>
@@ -23,12 +27,12 @@ import Pdf from "../assets/pdf.svg";
 
 export default {
   name: "InformationResponsibleSourcing",
+  components: {
+    SectionHeader
+  },
   props: {
     sectionTitle: String,
     informationResponsibleSourcing: {},
-  },
-  components: {
-    SectionHeader
   },
   setup() {
     return {

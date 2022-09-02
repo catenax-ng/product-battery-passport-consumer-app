@@ -36,6 +36,7 @@
     "@vue/cli-service": "~5.0.0",
     "cypress": "^10.3.0",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^8.0.3"
   },
   "eslintConfig": {
@@ -44,8 +45,9 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
+      "plugin:vue/vue3-recommended",
+      "eslint:recommended",
+      "prettier"
     ],
     "parserOptions": {
       "parser": "@babel/eslint-parser"

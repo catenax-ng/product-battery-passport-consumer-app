@@ -2,14 +2,30 @@
   <SectionHeader title="5. Dismantling Procedures" />
   <div class="section-content">
     <div class="sub-section-container">
-      <a :href="dismantlingProcedures.vehicleDismantlingProcedure.url" class="field-container" target="_blank">
-        <img :src="Pdf" alt="settings" class="icon" />
+      <a
+        :href="dismantlingProcedures.vehicleDismantlingProcedure.url"
+        class="field-container"
+        target="_blank"
+      >
+        <img
+          :src="Pdf"
+          alt="settings"
+          class="icon"
+        >
         <span class="field-value">
           {{ dismantlingProcedures.vehicleDismantlingProcedure.value }}
         </span>
       </a>
-      <a :href="dismantlingProcedures.batteryDismantlingProcedure.url" class="field-container" target="_blank">
-        <img :src="Pdf" alt="settings" class="icon" />
+      <a
+        :href="dismantlingProcedures.batteryDismantlingProcedure.url"
+        class="field-container"
+        target="_blank"
+      >
+        <img
+          :src="Pdf"
+          alt="settings"
+          class="icon"
+        >
         <span class="field-value">
           {{ dismantlingProcedures.batteryDismantlingProcedure.value }}
         </span>
@@ -24,12 +40,12 @@ import Pdf from "../assets/pdf.svg";
 
 export default {
   name: "DismantlingProcedures",
+  components: {
+    SectionHeader
+  },
   props: {
     sectionTitle: String,
     dismantlingProcedures: {},
-  },
-  components: {
-    SectionHeader
   },
   setup() {
     return {

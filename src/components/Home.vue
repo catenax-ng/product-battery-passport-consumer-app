@@ -1,5 +1,8 @@
 <template>
-  <Spinner v-if="loading" class="spinner-container" />
+  <Spinner
+    v-if="loading"
+    class="spinner-container"
+  />
   <div v-else>
     <BatteryPassport class="battery-page-container" />
   </div>
@@ -14,14 +17,14 @@ export default ({
     Spinner,
     BatteryPassport
   },
+  props: {
+    provider: String,
+    battery: String,
+  },
   data() {
     return {
       loading: true
     }
-  },
-  props: {
-    provider: String,
-    battery: String,
   },
   created() {
     this.loading = false;

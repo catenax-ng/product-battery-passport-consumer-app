@@ -2,19 +2,44 @@
   <div>
     <div class="header-container profile-container">
       <div class="logo-container">
-        <img :src="CatenaLogo" alt="logo" class="logo" />
+        <img
+          :src="CatenaLogo"
+          alt="logo"
+          class="logo"
+        >
       </div>
       <div class="right-manu-wrapper">
         <div class="right-menu-container">
-          <img :src="Settings" alt="settings" class="buttons" />
-          <img :src="Notifications" alt="profile" class="buttons" />
+          <img
+            :src="Settings"
+            alt="settings"
+            class="buttons"
+          >
+          <img
+            :src="Notifications"
+            alt="profile"
+            class="buttons"
+          >
           <span>
             <span @mouseover="hover = true">
-              <img :src="Profile" alt="profile" class="buttons" title="User profile" />
+              <img
+                :src="Profile"
+                alt="profile"
+                class="buttons"
+                title="User profile"
+              >
             </span>
-            <div class="profile-menu" v-if="hover" @mouseleave="hover = false">
+            <div
+              v-if="hover"
+              class="profile-menu"
+              @mouseleave="hover = false"
+            >
               <div class="menu-btn">
-                <img :src="Profile" alt="profile" class="menu-profile" />
+                <img
+                  :src="Profile"
+                  alt="profile"
+                  class="menu-profile"
+                >
                 <!--TODO: Profile page onClick-->
                 <span class="profile-text">
                   {{ username }}
@@ -22,14 +47,20 @@
                 </span>
               </div>
               <div class="menu-btn">
-                <span class="profile-text" @click="logout">Sign out</span>
+                <span
+                  class="profile-text"
+                  @click="logout"
+                >Sign out</span>
               </div>
             </div>
           </span>
         </div>
       </div>
     </div>
-    <div v-if="batteryId" class="id-container">
+    <div
+      v-if="batteryId"
+      class="id-container"
+    >
       <div class="id-wrapper">
         <h1>
           BatteryID:
@@ -37,7 +68,13 @@
         </h1>
       </div>
       <div class="code-container">
-        <img :src="QrCode" alt="profile" class="code" width="170" height="170" />
+        <img
+          :src="QrCode"
+          alt="profile"
+          class="code"
+          width="170"
+          height="170"
+        >
       </div>
     </div>
   </div>
@@ -62,13 +99,8 @@ export default {
     Settings,
     Logout,
   },
-  data() {
-    return {
-      hover: false,
-      username: "",
-      role: "",
-      auth: inject('authentication'),
-    }
+  props: {
+    batteryId: {},
   },
   setup() {
     return {
@@ -80,13 +112,13 @@ export default {
       Logout,
     };
   },
-  methods: {
-    logout() {
-      this.auth.logout();
-    },
-    scanQRCode() {
-      this.$router.push({ name: "ScanPassport" });
-    },
+  data() {
+    return {
+      hover: false,
+      username: "",
+      role: "",
+      auth: inject('authentication'),
+    }
   },
   mounted() {
     if (this.auth.isUserAuthenticated) {
@@ -94,8 +126,13 @@ export default {
       this.role = this.auth.getRole();
     }
   },
-  props: {
-    batteryId: {},
+  methods: {
+    logout() {
+      this.auth.logout();
+    },
+    scanQRCode() {
+      this.$router.push({ name: "ScanPassport" });
+    },
   },
 };
 </script>

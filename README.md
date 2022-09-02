@@ -54,6 +54,10 @@ npm run serve
 npm run build
 ```
 
+### How to set up a code editor (VSCode based)
+
+See [How to set up a code  editor](https://confluence.catena-x.net/pages/viewpage.action?pageId=55009683).
+
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
