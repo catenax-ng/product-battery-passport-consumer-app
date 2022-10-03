@@ -3,46 +3,59 @@
   <div v-else>
     <Header />
     <div class="container" data-cy="battery-pass-container">
-      <label class="label" for="Provider">Battery Provider:</label>
-      <select
-        id="selectProvider"
-        v-model="selectedProvider"
-        class="select"
-        placeholder="Select Battery Provider"
-        data-cy="provider-select"
-        @change="getBatteriesByProvider()"
+      <div
+        v-if="role === 'Recycler'"
+        data-cy="dashboard-container"
+        class="dashboard-container"
       >
-        <option value="" disabled selected>Select Battery Provider...</option>
-        <option
-          v-for="(providerDetails, index) in listProviders"
-          :key="index"
-          :value="providerDetails.name"
+        <div class="titles-container">
+          <div class="title">Welcome back {{ name }}!</div>
+          <div class="sub-title">See batteries scanned today</div>
+          <div class="sub-title orange">See full history</div>
+        </div>
+        <DashboardTable />
+      </div>
+      <div v-if="role === 'OEM'" class="container">
+        <label class="label" for="Provider">Battery Provider:</label>
+        <select
+          id="selectProvider"
+          v-model="selectedProvider"
+          class="select"
+          placeholder="Select Battery Provider"
+          data-cy="provider-select"
+          @change="getBatteriesByProvider()"
         >
-          {{ providerDetails.name }}
-        </option>
-      </select>
-      <label class="label" for="Battery">Battery:</label>
-      <select
-        id="selectBattery"
-        v-model="selectedBattery"
-        required
-        class="form-select select"
-        :disabled="selectedProvider === ''"
-        placeholder="Select Battery"
-        data-cy="battery-select"
-        @change="getAssetIdsByBattery()"
-      >
-        <option value="" disabled selected>Select Battery...</option>
-        <option
-          v-for="(battery, id) in provider.batteries"
-          :key="id"
-          :value="battery.id"
+          <option value="" disabled selected>Select Battery Provider...</option>
+          <option
+            v-for="(providerDetails, index) in listProviders"
+            :key="index"
+            :value="providerDetails.name"
+          >
+            {{ providerDetails.name }}
+          </option>
+        </select>
+        <label class="label" for="Battery">Battery:</label>
+        <select
+          id="selectBattery"
+          v-model="selectedBattery"
+          required
+          class="form-select select"
+          :disabled="selectedProvider === ''"
+          placeholder="Select Battery"
+          data-cy="battery-select"
+          @change="getAssetIdsByBattery()"
         >
-          {{ battery.name }}
-        </option>
-      </select>
-      <br />
-      <!-- <div v-if="assetIdsVisible">
+          <option value="" disabled selected>Select Battery...</option>
+          <option
+            v-for="(battery, id) in provider.batteries"
+            :key="id"
+            :value="battery.id"
+          >
+            {{ battery.name }}
+          </option>
+        </select>
+        <br />
+        <!-- <div v-if="assetIdsVisible">
         <label class="label" for="Search criteria">Search Criteria:</label
         ><br /><br />
         <textarea
@@ -51,23 +64,16 @@
           style="height: 120px; width: 340px"
         ></textarea>
       </div> -->
-      <button
-        :disabled="!validateFields(selectedProvider, selectedBattery)"
-        class="btn btn-success center success-btn"
-        type="button"
-        data-cy="passport-btn"
-        @click="getProductPassport"
-      >
-        Get Battery Passport
-      </button>
-    </div>
-    <div data-cy="dashboard-container" class="dashboard-container">
-      <div class="titles-container">
-        <div class="title">Welcome back {{ name }}!</div>
-        <div class="sub-title">See batteries scanned today</div>
-        <div class="sub-title orange">See full history</div>
+        <button
+          :disabled="!validateFields(selectedProvider, selectedBattery)"
+          class="btn btn-success center success-btn"
+          type="button"
+          data-cy="passport-btn"
+          @click="getProductPassport"
+        >
+          Get Battery Passport
+        </button>
       </div>
-      <DashboardTable />
     </div>
   </div>
 </template>
@@ -98,6 +104,7 @@ export default {
       assetIds: {},
       assetIdsVisible: false,
       name: "",
+      role: "",
     };
   },
   created() {
@@ -110,6 +117,7 @@ export default {
       let user = this.auth.getUserName();
       let role = this.auth.getRole();
       console.log("CurrentUser: ", user, " role: ", role);
+      this.role = role;
       // check query params for QR code scanning
       this.selectedProvider = this.$route.query.provider;
       this.selectedBattery = this.$route.query.battery;
