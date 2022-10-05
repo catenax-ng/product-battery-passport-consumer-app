@@ -1,6 +1,7 @@
 ---
 backend:
   enabled: true
+  fullnameOverride: "materialpass-edc-backend"
   service:
     frontend:
       port: 80
@@ -20,6 +21,7 @@ dataplane:
     tag: 0.1.1
     pullPolicy: IfNotPresent
   envSecretName: "consumer-dataplane-secret"
+  fullnameOverride: "materialpass-edc-dataplane"
   edc:
     endpoints:
       default:
@@ -79,6 +81,7 @@ dataplane:
 
 controlplane:
   enabled: true
+  fullnameOverride: "materialpass-edc-controlplane"
   image:
     tag: 0.1.1
     pullPolicy: IfNotPresent
