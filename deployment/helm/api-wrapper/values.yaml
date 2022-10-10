@@ -85,7 +85,7 @@ edc:
     # Default api for client communications
     default:
       port: "9191"
-      path: /api
+      path: /wrapper/api
       ingress: true
     # Callback endpoint for EDC
     callback:
@@ -107,23 +107,6 @@ ingress:
   ## Set to true to enable ingress record generation
   ##
   enabled: true
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/ssl-passthrough: "false"
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-  hosts:
-    - host: materialpass.int.demo.catena-x.net
-      paths:
-        - path: /wrapper/api
-          pathType: Prefix
-  tls:
-    - secretName: tls-secret
-      hosts:
-        - materialpass.int.demo.catena-x.net
-
   ##
   ## Adds cert-manager annotations to the ingress
   ##
@@ -140,12 +123,19 @@ ingress:
   ##
   ## Additional ingress annotations to add
   ##
-  annotations: {}
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 
   ##
   ## The hostname to be used to precisely map incoming traffic onto the underlying network service
   ##
-  hostname: "api-wrapper.local"
+  hostname: "localhost"
+  # hostname: "materialpass.int.demo.catena-x.net"
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

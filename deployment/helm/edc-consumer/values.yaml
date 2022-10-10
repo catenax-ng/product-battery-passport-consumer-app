@@ -160,6 +160,7 @@ controlplane:
     EDC_DATASOURCE_TRANSFERPROCESS_NAME: transferprocess
     EDC_DATASOURCE_TRANSFERPROCESS_USER: *psqlUsername
     EDC_DATASOURCE_TRANSFERPROCESS_URL: *psqlJdbcUrl
+    EDC_RECEIVER_HTTP_ENDPOINT: http://consumer-api-wrapper/callback/endpoint-data-reference
     EDC_DATAPLANE_SELECTOR_HTTPPROXY_PROPERTIES: >-
       {
         "publicApiUrl": "https://materialpass.int.demo.catena-x.net/consumer/dataplane/api/public"
@@ -263,7 +264,8 @@ controlplane:
       # edc.oauth.validation.nbf.leeway=
       # edc.receiver.http.auth-code=
       # edc.receiver.http.auth-key=
-      edc.receiver.http.endpoint=http://materialpass-edc-backend
+      # edc.receiver.http.endpoint=http://materialpass-edc-backend
+      edc.receiver.http.endpoint=http://consumer-api-wrapper/callback/endpoint-data-reference
       edc.transfer.proxy.endpoint=http://materialpass-edc-dataplane:8185/consumer/dataplane/api/public
       # edc.transfer.proxy.token.validity.seconds=
       edc.transfer.proxy.token.signer.privatekey.alias=ids-daps_key
