@@ -63,19 +63,19 @@ securityContext: {}
 ## Whether to enable kubernetes liveness-probes
 ##
 livenessProbe:
-  enabled: true
+  enabled: false
 
 ##
 ## Whether to enable kubernetes readiness-probes
 ##
 readinessProbe:
-  enabled: true
+  enabled: false
 
 ##
 ## Whether to enable kubernetes startup-probes
 ##
 startupProbe:
-  enabled: true
+  enabled: false
 
 ##
 ## EDC endpoints exposed by the data-plane
@@ -128,7 +128,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/ssl-passthrough: "false"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 
   ##
