@@ -134,8 +134,7 @@ ingress:
   ##
   ## The hostname to be used to precisely map incoming traffic onto the underlying network service
   ##
-  hostname: "localhost"
-  # hostname: "materialpass.int.demo.catena-x.net"
+  hostname: "materialpass.int.demo.catena-x.net"
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
