@@ -55,7 +55,7 @@ import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 import axios from "axios";
 import { AAS_PROXY_URL } from "@/services/service.const";
-import api_wrapper from "@/services/wrapper";
+import apiWrapper from "@/services/wrapper";
 import AAS from "@/services/aasServices";
 import { inject } from "vue";
 
@@ -147,19 +147,34 @@ export default {
       // const digitalTwinId = await this.getDigitalTwinId(assetIds);
       // const digitalTwin = await this.getDigitalTwinObjectById(digitalTwinId);
       // const response = await this.getSubmodelData(digitalTwin);
-      let requestHeaders ={
-        "Authorization" : "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5dlp4ejhyLVZvYndEd0dqMW1TUHlRMWFTX1loYWJFZlQwakpsX2ZEZk4wIn0.eyJleHAiOjE2NjYzNjQ3NzYsImlhdCI6MTY2NjM2NDQ3NiwianRpIjoiZWZiYTAyNGUtMTY3My00ZWZlLTgxMGEtYTdlN2ZlMjgzNTIxIiwiaXNzIjoiaHR0cHM6Ly9jZW50cmFsaWRwLmRlbW8uY2F0ZW5hLXgubmV0L2F1dGgvcmVhbG1zL0NYLUNlbnRyYWwiLCJhdWQiOlsicmVhbG0tbWFuYWdlbWVudCIsIkNsNC1DWC1EaWdpdGFsVHdpbiIsImFjY291bnQiXSwic3ViIjoiZjEwNjViOWYtNDEwZC00M2NjLTg4YTQtODAxNzAzYzYxMDZhIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoic2EtY2w2LWN4LTI5IiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtY2F0ZW5hLXggcmVhbG0iLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsibWFuYWdlLXVzZXJzIiwidmlldy1jbGllbnRzIiwicXVlcnktY2xpZW50cyJdfSwiQ2w0LUNYLURpZ2l0YWxUd2luIjp7InJvbGVzIjpbImFkZF9kaWdpdGFsX3R3aW4iLCJ2aWV3X2RpZ2l0YWxfdHdpbiIsImRlbGV0ZV9kaWdpdGFsX3R3aW4iLCJ1cGRhdGVfZGlnaXRhbF90d2luIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiYnBuIjoiQlBOTDAwMDAwMDAwMDAwMCIsImNsaWVudEhvc3QiOiIxMC4yNDAuMC42IiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJjbGllbnRJZCI6InNhLWNsNi1jeC0yOSIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1zYS1jbDYtY3gtMjkiLCJjbGllbnRBZGRyZXNzIjoiMTAuMjQwLjAuNiJ9.CRGobWPlAy-0mPFHutuIUeMi0LbKoV9Xak23yczShPdsRTkQyVWfjuW79Vbdwg3RS_cdyLPc0nlVnJ8cF_noDL6PnRIIhEk0VdqvJqrtUP-Ur7dANA64VU5gY1Re3OHh16Gu3fZIKgbOyWehdR6zXc3cjuigfQeCcf6N9nQAIrMY1TZWr06ilnCZ-DdTvWSZv_ZZd0bkPvfuYVgVobqmy2jshAYJ_kZKJpsb2MUBC842aAlj0MnY3tzeeXVVFfwx3ou18KiR7wWPY6UZIq_9YcvcV4hwfANbPBf1DQG-ubgmS5COW5-xlUpVtgeAdcusPYMO6LRcEgB82qmk-pgj1g"
-      };
       let aas = new AAS();
-      let wrapper = new api_wrapper();
-      const shellId = await aas.getAasShellId(assetIds, requestHeaders);
-      const shellDescriptor = await aas.getShellDescriptor(shellId[0], requestHeaders);
-      const subModel = await aas.getSubmodelDescriptor(shellDescriptor, requestHeaders);
+      let wrapper = new apiWrapper();
+      let accessToken = wrapper.getAuthTokenForTechnicalUser();
+      let AASRequestHeader ={
+        "Authorization" : "Bearer " + accessToken
+      };
+      
+      const shellId = await aas.getAasShellId(assetIds, AASRequestHeader);
+      const shellDescriptor = await aas.getShellDescriptor(shellId[0], AASRequestHeader);
+      const subModel = await aas.getSubmodelDescriptor(shellDescriptor, AASRequestHeader);
+      if (subModel.endpoints.length > 0){
+        let providerConnector={
+          "connectorAddress": subModel.endpoints[0].protocolInformation.endpointAddress,
+          "idShort": subModel.idShort
+        };
+        let APIWrapperRequestHeader={
+          'x-api-key': 'password'
+        };
 
-      const providerEndpoint = subModel.endpoints[0].protocolInformation.endpointAddress;
-      console.log(providerEndpoint);
-      const response = await wrapper.performEDCDataTransfer("101",providerEndpoint);
-      return response;
+        let assetId = assetIds[1].value; // Two elements in json array [batteryIDDMCode, assetId], get the last element and it wll always be the asset id i.e., [1]
+        console.log('Asset Id is ' + assetId);
+        const response = await wrapper.performEDCDataTransfer("101",providerConnector,APIWrapperRequestHeader);
+        return response;
+      }
+      else
+        alert("There is no connector endpoint defined in submodel.. Could not proceed further!");
+
+      
     },
   },
 };
