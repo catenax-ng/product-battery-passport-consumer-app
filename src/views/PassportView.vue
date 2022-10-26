@@ -149,11 +149,14 @@ export default {
       // const response = await this.getSubmodelData(digitalTwin);
       let aas = new AAS();
       let wrapper = new apiWrapper();
-      let accessToken = await this.auth.getAuthTokenForTechnicalUser();
-      console.log('Bearer ' + accessToken);
+      //let accessToken = await this.auth.getAuthTokenForTechnicalUser();
+      //console.log('Bearer ' + accessToken);
+      let accessToken = this.auth.getAccessToken();
+      console.log(accessToken);
       let AASRequestHeader ={
         "Authorization" : "Bearer " + accessToken
       };
+      
       
       const shellId = await aas.getAasShellId(assetIds, AASRequestHeader);
       const shellDescriptor = await aas.getShellDescriptor(shellId[0], AASRequestHeader);
