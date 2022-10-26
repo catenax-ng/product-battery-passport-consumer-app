@@ -209,30 +209,4 @@ export default class wrapper {
     }
     return await this.getDataFromConsumerBackend(requestBody.transferProcessId);
   }
-    
-  getAuthTokenForTechnicalUser() {
-      
-    var requestBody = {
-      "client_id": "",
-      "client_secret": "",
-      "grant_type": "",
-      "scope": ""
-    };
-    
-    axios.post(`URL`, requestBody, {
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      }
-    })
-      .then((response) => {
-        console.log(response);
-        return response.data;
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-
-
-
-  }
 }

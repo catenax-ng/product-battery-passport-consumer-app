@@ -8,7 +8,7 @@
 			"type": "car battery",
 			"AssetIds": [
 				{ "key": "batteryIDDMCCode", "value": "X123456789012X12345678901234567" },
-				{ "key": "AssetId", "value": "101" }
+				{ "key": "AssetId", "value": "urn:uuid:61125dc3-5e6f-4f4b-838d-447432b97918" }
 			]
 
 			}

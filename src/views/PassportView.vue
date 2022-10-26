@@ -54,7 +54,7 @@ import Spinner from "@/components/Spinner.vue";
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 import axios from "axios";
-import { AAS_PROXY_URL } from "@/services/service.const";
+import { AAS_PROXY_URL, API_KEY, CX_REGISTRY_URL } from "@/services/service.const";
 import apiWrapper from "@/services/wrapper";
 import AAS from "@/services/aasServices";
 import { inject } from "vue";
@@ -149,7 +149,8 @@ export default {
       // const response = await this.getSubmodelData(digitalTwin);
       let aas = new AAS();
       let wrapper = new apiWrapper();
-      let accessToken = wrapper.getAuthTokenForTechnicalUser();
+      let accessToken = await this.auth.getAuthTokenForTechnicalUser();
+      console.log('Bearer ' + accessToken);
       let AASRequestHeader ={
         "Authorization" : "Bearer " + accessToken
       };
@@ -163,18 +164,16 @@ export default {
           "idShort": subModel.idShort
         };
         let APIWrapperRequestHeader={
-          'x-api-key': 'password'
+          'x-api-key': API_KEY
         };
 
-        let assetId = assetIds[1].value; // Two elements in json array [batteryIDDMCode, assetId], get the last element and it wll always be the asset id i.e., [1]
-        console.log('Asset Id is ' + assetId);
-        const response = await wrapper.performEDCDataTransfer("101",providerConnector,APIWrapperRequestHeader);
+        let assetId = JSON.parse(assetIds)[1].value; // Two elements in json array [batteryIDDMCode, assetId], get the last element and it wll always be the asset id i.e., [1]
+        console.info('Selected asset Id: ' + assetId);
+        const response = await wrapper.performEDCDataTransfer(assetId, providerConnector,APIWrapperRequestHeader);
         return response;
       }
       else
         alert("There is no connector endpoint defined in submodel.. Could not proceed further!");
-
-      
     },
   },
 };

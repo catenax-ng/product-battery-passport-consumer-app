@@ -1,5 +1,6 @@
 import { REDIRECT_URI, INIT_OPTIONS, SERVER_URL } from "@/services/service.const";
 import Keycloak from 'keycloak-js';
+import axios from "axios";
 
 
 export default class authentication {
@@ -79,5 +80,41 @@ export default class authentication {
     }
     getUrl() {
       return window.location.href;
+    }
+
+    /***** Technical User Authentication *****/
+
+    getAuthTokenForTechnicalUser() {   
+
+      const params = new URLSearchParams({
+
+        grant_type: '',
+        client_id: '',
+        client_secret: '',
+        scope: ''
+      });
+        
+      return new Promise((resolve) => {
+        axios({
+
+          method: 'post',
+          url: 'https://centralidp.demo.catena-x.net/auth/realms/CX-Central/protocol/openid-connect/token',
+          data: params.toString(),
+          config: {
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          }
+
+        }).then(response => {
+
+          console.log(response.data);
+          resolve(response.data.access_token);
+
+        }).catch(error => {
+
+          console.error(error);
+          resolve("rejected");
+
+        });
+      });
     }
 }

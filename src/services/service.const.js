@@ -6,6 +6,7 @@ const GOOGLE_CHART_API_URL = "https://chart.googleapis.com";
 const DUMMY_SERVICE = "http://localhost:3000";
 const SERVER_URL = "https://materialpass.int.demo.catena-x.net";
 const CX_REGISTRY_URL = "https://semantics.int.demo.catena-x.net";
+const API_KEY = "password";
 
 let INIT_OPTIONS = {};
 let REDIRECT_URI = "";
@@ -29,5 +30,5 @@ else {
   REDIRECT_URI = "http://localhost:8080/";
 }
 
-export {TWIN_REGISTRY_URL, AAS_PROXY_URL, MOCK_AUTH_URL, GOOGLE_CHART_API_URL, DUMMY_SERVICE, INIT_OPTIONS, REDIRECT_URI, CX_REGISTRY_URL, SERVER_URL};
+export {TWIN_REGISTRY_URL, AAS_PROXY_URL, MOCK_AUTH_URL, GOOGLE_CHART_API_URL, DUMMY_SERVICE, INIT_OPTIONS, REDIRECT_URI, CX_REGISTRY_URL, SERVER_URL, API_KEY};
 
