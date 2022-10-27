@@ -12,10 +12,10 @@ const API_KEY = "password";
 let INIT_OPTIONS = {};
 let REDIRECT_URI = "";
 let CLIENT_CREDENTIALS = {
-  grant_type: 'client_credentials',
-  client_id: 'sa-cl6-cx-29',
-  client_secret: '3vVKxOwPfrAgiJfX1VTn6cttm0DpUbKv',
-  scope: 'openid profile email'
+  grant_type: '',
+  client_id: '',
+  client_secret: '',
+  scope: ''
 };
 // for production
 if (window.location.href.includes(SERVER_URL)) {
