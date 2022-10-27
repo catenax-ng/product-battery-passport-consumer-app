@@ -204,7 +204,7 @@ export default class wrapper {
     // Check the transfer status repeatedly until it is COMPLETED from consumer side
     while (result == null || result.state != "COMPLETED") {
 
-      result = await this.getTransferProcessById(transfer.id);        
+      result = await this.getTransferProcessById(transfer.id, requestHeaders);        
       console.log("Transfer state:  ", result.type + '_' + result.state);
     }
     return await this.getDataFromConsumerBackend(requestBody.transferProcessId);
