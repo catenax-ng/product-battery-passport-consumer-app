@@ -13,8 +13,8 @@ let INIT_OPTIONS = {};
 let REDIRECT_URI = "";
 let CLIENT_CREDENTIALS = {
   grant_type: 'client_credentials',
-  client_id: 'sa-cl6-cx-30',
-  client_secret: 'UNcVSIQFFFJdKS56MZjem9bOArQWnzoH',
+  client_id: '',
+  client_secret: '',
   scope: 'openid profile email'
 };
 // for production
