@@ -13,8 +13,8 @@ let INIT_OPTIONS = {};
 let REDIRECT_URI = "";
 let CLIENT_CREDENTIALS = {
   grant_type: 'client_credentials',
-  client_id: '',
-  client_secret: '',
+  client_id: process.env.CLIENT_ID,
+  client_secret: process.env.CLIENT_SECRET,
   scope: 'openid profile email'
 };
 // for production
@@ -37,5 +37,5 @@ else {
   REDIRECT_URI = "http://localhost:8080/";
 }
 
-export {TWIN_REGISTRY_URL, AAS_PROXY_URL, MOCK_AUTH_URL, GOOGLE_CHART_API_URL, DUMMY_SERVICE, INIT_OPTIONS, REDIRECT_URI, CX_REGISTRY_URL, SERVER_URL, API_KEY, CLIENT_CREDENTIALS, IDP_URL};
+export { TWIN_REGISTRY_URL, AAS_PROXY_URL, MOCK_AUTH_URL, GOOGLE_CHART_API_URL, DUMMY_SERVICE, INIT_OPTIONS, REDIRECT_URI, CX_REGISTRY_URL, SERVER_URL, API_KEY, CLIENT_CREDENTIALS, IDP_URL };
 
