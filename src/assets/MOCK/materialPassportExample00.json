@@ -1,0 +1,261 @@
+{
+  "40db2dfd-cc59-4704-90bb-168333b26654": [
+    {
+      "label": "1. General information",
+      "content": [
+        {
+          "label": "Name",
+          "type": "string",
+          "content": [
+            "EV Battery"
+          ]
+        },
+        {
+          "label": "Battery Type",
+          "type": "string",
+          "content": [
+            "Lithium-Ion"
+          ]
+        },
+        {
+          "label": "Battery Model",
+          "type": "string",
+          "content": [
+            "2432-5665"
+          ]
+        },
+        {
+          "label": "Importer information",
+          "type": "address",
+          "content": [
+            {
+              "name": "CompanyA",
+              "street": "Street 9",
+              "zip": "12-678",
+              "country": "Germany",
+              "phone": "0056 6783 345 569",
+              "email": "contact@companya.com",
+              "www": "www.companya.com"
+            }
+          ]
+        },
+        {
+          "label": "Dimensions",
+          "type": "dimensions",
+          "content": [
+            {
+              "length": {
+                "value": "200",
+                "unit": "cm"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "2. Composition",
+      "content": [
+        {
+          "label": "Cells",
+          "type": "material",
+          "content": [
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "Cell 01",
+              "uuid": "c4daf9fe-be3c-46c8-aef4-82791cb5cdbc"
+            },
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "Cell 02"
+            }
+          ]
+        },
+        {
+          "label": "Casing",
+          "type": "material",
+          "content": [
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "Aluminim aloy"
+            },
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "plastic"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "c4daf9fe-be3c-46c8-aef4-82791cb5cdbc": [
+    {
+      "label": "1. General information",
+      "content": [
+        {
+          "label": "Name",
+          "type": "string",
+          "content": [
+            "Cell EV Battery"
+          ]
+        },
+        {
+          "label": "Cell Type",
+          "type": "string",
+          "content": [
+            "Lithium-Ion"
+          ]
+        },
+        {
+          "label": "Cell Model",
+          "type": "string",
+          "content": [
+            "4680"
+          ]
+        },
+        {
+          "label": "Producer information",
+          "type": "address",
+          "content": [
+            {
+              "name": "CompanyB",
+              "street": "Street 18",
+              "zip": "97-678",
+              "country": "Germany",
+              "phone": "0056 6783 345 569",
+              "email": "contact@companyb.com",
+              "www": "www.companyb.com"
+            }
+          ]
+        },
+        {
+          "label": "Dimensions",
+          "type": "dimensions",
+          "content": [
+            {
+              "length": {
+                "value": "100",
+                "unit": "cm"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "2. Cell chemistry",
+      "content": [
+        {
+          "label": "Electrolyte composition",
+          "type": "material",
+          "content": [
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "dimethyl carbonate (DCM)"
+            },
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "dimethyl carbonate (DCM)"
+            }
+          ]
+        },
+        {
+          "label": "Anode composition",
+          "type": "material",
+          "content": [
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "dimethyl carbonate (DCM)"
+            },
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "dimethyl carbonate (DCM)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "3. Documents",
+      "content": [
+        {
+          "label": "Electrolyte composition",
+          "type": "material",
+          "content": [
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "dimethyl carbonate (DCM)"
+            },
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "dimethyl carbonate (DCM)"
+            }
+          ]
+        },
+        {
+          "label": "Anode composition",
+          "type": "material",
+          "content": [
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "dimethyl carbonate (DCM)"
+            },
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "dimethyl carbonate (DCM)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "4. Additional information",
+      "content": [
+        {
+          "label": "Electrolyte composition",
+          "type": "material",
+          "content": [
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "dimethyl carbonate (DCM)"
+            },
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "dimethyl carbonate (DCM)"
+            }
+          ]
+        },
+        {
+          "label": "Anode composition",
+          "type": "material",
+          "content": [
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "dimethyl carbonate (DCM)"
+            },
+            {
+              "matierialPercentageMassFraction": null,
+              "matierialWeight": null,
+              "materialName": "dimethyl carbonate (DCM)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

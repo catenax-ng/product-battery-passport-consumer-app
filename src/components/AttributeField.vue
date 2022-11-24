@@ -16,6 +16,9 @@
           <span v-if="attribute.matierialWeight">
             - {{ attribute.matierialWeight }}kg
           </span>
+          <div v-if="attribute.uuid">
+            <button @click="onClick">{{ attribute.uuid }}</button>
+          </div>
         </li>
       </ul>
     </div>
@@ -23,11 +26,22 @@
 </template>
 
 <script>
+import materialPassportExample00 from "../assets/MOCK/materialPassportExample00.json";
+
 export default {
   name: "AttributeField",
   props: {
     attributesList: { type: Array, default: () => [] },
     label: { type: [String, Number], default: "" },
+  },
+  methods: {
+    onClick() {
+      this.data =
+        materialPassportExample00["c4daf9fe-be3c-46c8-aef4-82791cb5cdbc"];
+      this.$router.push({
+        path: `/c4daf9fe-be3c-46c8-aef4-82791cb5cdbc`,
+      });
+    },
   },
 };
 </script>
