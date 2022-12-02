@@ -30,12 +30,16 @@
       <div class="right-manu-wrapper">
         <div class="right-menu-container">
           <router-link to="/">
-            <img :src="QRScanner" alt="QRScanner" class="buttons" />
+            <div class="tooltip">
+              <img :src="QRScanner" alt="QRScanner" class="buttons" />
+              <span class="tooltiptext">QR code scanner</span>
+            </div>
           </router-link>
+
           <img :src="Settings" alt="settings" class="buttons" />
           <img :src="Notifications" alt="profile" class="buttons" />
           <span>
-            <span @mouseover="hover = true">
+            <span @mouseover="profileHover = true">
               <img
                 :src="Profile"
                 alt="profile"
@@ -43,7 +47,11 @@
                 title="User profile"
               />
             </span>
-            <div v-if="hover" class="profile-menu" @mouseleave="hover = false">
+            <div
+              v-if="profileHover"
+              class="profile-menu"
+              @mouseleave="profileHover = false"
+            >
               <div class="menu-btn">
                 <img :src="Profile" alt="profile" class="menu-profile" />
                 <!--TODO: Profile page onClick-->
@@ -71,7 +79,13 @@
           }}
         </h1>
       </div>
-      <div v-if="batteryId.batteryIdentification.batteryIDDMCCode == 'X123456789012X12345678901234566'" class="code-container">
+      <div
+        v-if="
+          batteryId.batteryIdentification.batteryIDDMCCode ==
+          'X123456789012X12345678901234566'
+        "
+        class="code-container"
+      >
         <img
           :src="X123456789012X12345678901234566"
           alt="profile"
@@ -80,7 +94,12 @@
           height="170"
         />
       </div>
-      <div v-else-if="batteryId.batteryIdentification.batteryIDDMCCode == 'NCR186850B'" class="code-container">
+      <div
+        v-else-if="
+          batteryId.batteryIdentification.batteryIDDMCCode == 'NCR186850B'
+        "
+        class="code-container"
+      >
         <img
           :src="NCR186850B"
           alt="profile"
@@ -89,7 +108,10 @@
           height="170"
         />
       </div>
-      <div v-if="batteryId.batteryIdentification.batteryIDDMCCode == 'IMR18650V1'" class="code-container">
+      <div
+        v-if="batteryId.batteryIdentification.batteryIDDMCCode == 'IMR18650V1'"
+        class="code-container"
+      >
         <img
           :src="IMR18650V1"
           alt="profile"
@@ -113,7 +135,6 @@ import QrCode from "../assets/BMW_test-battery-1.svg";
 import IMR18650V1 from "../assets/IMR18650V1.svg";
 import X123456789012X12345678901234566 from "../assets/X123456789012X12345678901234566.svg";
 import NCR186850B from "../assets/NCR186850B.svg";
-
 
 import Logout from "../assets/logout.png";
 import { inject } from "vue";
@@ -144,7 +165,7 @@ export default {
   },
   data() {
     return {
-      hover: false,
+      profileHover: false,
       hamburgerMenu: false,
       profileMenu: false,
       username: "",
@@ -170,6 +191,34 @@ export default {
 </script>
 
 <style scoped>
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: max-content;
+  background-color: #eaeaea;
+  box-shadow: 3px 4px 6px 0px #bebebe;
+  color: #3d3d3d;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 6px;
+  padding: 7px 15px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 65px;
+  transform: translate(-50%, -50%);
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
 h1 {
   font-weight: bold;
 }
