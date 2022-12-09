@@ -19,7 +19,12 @@
     <div class="header-container">
       <div class="left-menu-wrapper">
         <div class="left-menu-container">
-          <div class="empty-pusher"></div>
+          <router-link to="/dashboard">
+            <div class="tooltip">
+              <img :src="HistoryPage" alt="history" />
+              <span class="tooltiptext">History page</span>
+            </div>
+          </router-link>
           <h2 class="top-layer">Scan QR code</h2>
           <div class="top-layer" @click="torch = !torch">
             <img :src="Flesh" alt="flesh" />
@@ -94,6 +99,7 @@ import CatenaLogo from "../assets/logo.png";
 import Flesh from "../assets/flesh.svg";
 import Close from "../assets/close.svg";
 import QRFrame from "../assets/qrFrame.svg";
+import HistoryPage from "../assets/historyPage.svg";
 import Search from "../assets/qrSearch.svg";
 import Footer from "@/components/Footer.vue";
 import Logout from "../assets/logout.png";
@@ -121,6 +127,7 @@ export default {
       Notifications,
       Settings,
       Logout,
+      HistoryPage,
     };
   },
 
@@ -191,6 +198,34 @@ export default {
 </script>
 
 <style scoped>
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: max-content;
+  background-color: #3d3d3d;
+  box-shadow: 3px 4px 6px 0px #bebebe;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 6px;
+  padding: 7px 15px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 65px;
+  transform: translate(-60%, -50%);
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
 .error-frame {
   display: flex;
   align-items: center;
@@ -285,11 +320,17 @@ export default {
 
 .left-menu-wrapper {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* position: absolute;
   width: 20%;
   left: 0;
   right: 0;
   margin-left: auto;
   margin-right: auto;
+  transform: translate(-10%, -5%); */
 }
 
 .left-menu-container {

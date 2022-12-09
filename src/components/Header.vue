@@ -35,17 +35,17 @@
               <span class="tooltiptext">QR code scanner</span>
             </div>
           </router-link>
-
-          <img :src="Settings" alt="settings" class="buttons" />
-          <img :src="Notifications" alt="profile" class="buttons" />
+          <div class="tooltip">
+            <img :src="Settings" alt="settings" class="buttons" />
+            <span class="tooltiptext">Settings</span>
+          </div>
+          <div class="tooltip">
+            <img :src="Notifications" alt="profile" class="buttons" />
+            <span class="tooltiptext">Notifications</span>
+          </div>
           <span>
             <span @mouseover="profileHover = true">
-              <img
-                :src="Profile"
-                alt="profile"
-                class="buttons"
-                title="User profile"
-              />
+              <img :src="Profile" alt="profile" class="buttons" />
             </span>
             <div
               v-if="profileHover"
@@ -199,9 +199,9 @@ export default {
 .tooltip .tooltiptext {
   visibility: hidden;
   width: max-content;
-  background-color: #eaeaea;
+  background-color: #3d3d3d;
   box-shadow: 3px 4px 6px 0px #bebebe;
-  color: #3d3d3d;
+  color: #ffffff;
   font-size: 12px;
   font-weight: bold;
   text-align: center;
@@ -212,7 +212,7 @@ export default {
   position: absolute;
   z-index: 1;
   top: 65px;
-  transform: translate(-50%, -50%);
+  transform: translate(-60%, -50%);
 }
 
 .tooltip:hover .tooltiptext {
