@@ -32,16 +32,23 @@
           <router-link to="/">
             <div class="tooltip">
               <img :src="QRScanner" alt="QRScanner" class="buttons" />
-              <span class="tooltiptext">QR code scanner</span>
+
+              <v-tooltip activator="parent" location="bottom"
+                >QR code scanner</v-tooltip
+              >
             </div>
           </router-link>
           <div class="tooltip">
             <img :src="Settings" alt="settings" class="buttons" />
-            <span class="tooltiptext">Settings</span>
+
+            <v-tooltip activator="parent" location="bottom">Settings</v-tooltip>
           </div>
           <div class="tooltip">
             <img :src="Notifications" alt="profile" class="buttons" />
-            <span class="tooltiptext">Notifications</span>
+
+            <v-tooltip activator="parent" location="bottom"
+              >Notifications</v-tooltip
+            >
           </div>
           <span>
             <span @mouseover="profileHover = true">
@@ -196,7 +203,7 @@ export default {
   display: inline-block;
 }
 
-.tooltip .tooltiptext {
+/* .tooltip .tooltiptext {
   visibility: hidden;
   width: max-content;
   background-color: #3d3d3d;
@@ -208,7 +215,7 @@ export default {
   border-radius: 6px;
   padding: 7px 15px;
 
-  /* Position the tooltip */
+
   position: absolute;
   z-index: 1;
   top: 65px;
@@ -217,7 +224,8 @@ export default {
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
-}
+} 
+*/
 
 h1 {
   font-weight: bold;
@@ -276,7 +284,7 @@ h1 {
 .buttons {
   width: 26px;
   height: 26px;
-  margin: 15px 0 15px 30px;
+  margin: 15px 0 0 30px;
   cursor: pointer;
 }
 

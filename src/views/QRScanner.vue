@@ -1,8 +1,6 @@
 <template>
   <div class="qr-container">
-    <router-link to="/dashboard">
-      <img :src="CatenaLogo" alt="logo" class="logo" />
-    </router-link>
+    <router-link to="/dashboard"> </router-link>
     <div
       class="toast-alert"
       :class="{
@@ -22,12 +20,15 @@
           <router-link to="/dashboard">
             <div class="tooltip">
               <img :src="HistoryPage" alt="history" />
-              <span class="tooltiptext">History page</span>
+              <v-tooltip activator="parent" location="bottom"
+                >History page</v-tooltip
+              >
             </div>
           </router-link>
           <h2 class="top-layer">Scan QR code</h2>
           <div class="top-layer" @click="torch = !torch">
             <img :src="Flesh" alt="flesh" />
+            <v-tooltip activator="parent" location="bottom">Flesh</v-tooltip>
           </div>
         </div>
       </div>
@@ -201,25 +202,6 @@ export default {
 .tooltip {
   position: relative;
   display: inline-block;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: max-content;
-  background-color: #3d3d3d;
-  box-shadow: 3px 4px 6px 0px #bebebe;
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: bold;
-  text-align: center;
-  border-radius: 6px;
-  padding: 7px 15px;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-  top: 65px;
-  transform: translate(-60%, -50%);
 }
 
 .tooltip:hover .tooltiptext {
