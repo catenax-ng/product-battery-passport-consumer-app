@@ -1,11 +1,14 @@
 <template>
-  <router-view />
+  <v-app>
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
+  name: "App",
 };
 </script>
 
@@ -27,7 +30,7 @@ export default {
   min-height: 100vh;
 }
 
-.table-borderless> :not(caption)>*>* {
+.table-borderless > :not(caption) > * > * {
   border-bottom-width: 0;
   padding-left: 40px !important;
 }
@@ -40,7 +43,7 @@ export default {
   background-color: rgba(179, 203, 44, 0.05);
 }
 
-.table>thead {
+.table > thead {
   vertical-align: bottom;
   color: gray;
   font-size: 12px;
