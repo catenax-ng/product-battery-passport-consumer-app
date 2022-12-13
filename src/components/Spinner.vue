@@ -1,13 +1,19 @@
 <template>
   <div class="spinner-container">
-    <img class="spinner" src="../assets/spinner.svg" />
+    <img class="spinner" :src="Spinner" />
   </div>
 </template>
 
 <script>
+import Spinner from "../assets/spinner.svg";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Spinner",
+  setup() {
+    return {
+      Spinner,
+    };
+  },
 };
 </script>
 
