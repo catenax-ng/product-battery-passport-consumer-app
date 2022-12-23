@@ -91,12 +91,6 @@ public final class httpTools {
         return (KeycloakPrincipal) request.getUserPrincipal();// Get the user data from the request
     }
 
-    public static String getJWTToken(HttpServletRequest request) {
-        AccessToken token = httpTools.getCurrentUser(request);
-        logTools.printMessage(jsonTools.toJson(token));
-        return crypTools.toBase64Url(jsonTools.toJson(token));
-    }
-
     public static KeycloakSecurityContext getCurrentUserSession(HttpServletRequest request) {
         KeycloakPrincipal principal = httpTools.getCurrentUserPrincipal(request); // Get the principal to access the session
         if (principal == null) {

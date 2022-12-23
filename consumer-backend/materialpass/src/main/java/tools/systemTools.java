@@ -1,6 +1,5 @@
 package tools;
 
-import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 
@@ -33,14 +32,15 @@ public final class systemTools {
         MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
         return String.format("%.2f",(double)memoryMXBean.getHeapMemoryUsage().getUsed()/1073741824);
     }
+      /*
     public static String getMaxHeapMemory(){
         MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
         return String.format("%.2f",(double)memoryMXBean.getHeapMemoryUsage().getMax()/1073741824);
     }
-
     public Long getDiskUsage(){
         String path = fileTools.getWorkdirPath();
         File diskPartition = new File(path);
         return diskPartition.getTotalSpace() - diskPartition.getFreeSpace();
     }
+     */
 }
