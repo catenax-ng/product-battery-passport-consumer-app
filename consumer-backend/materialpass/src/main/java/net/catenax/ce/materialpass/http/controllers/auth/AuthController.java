@@ -24,9 +24,7 @@
 
 package net.catenax.ce.materialpass.http.controllers.auth;
 
-import net.catenax.ce.materialpass.models.Credential;
 import net.catenax.ce.materialpass.models.Response;
-import net.catenax.ce.materialpass.models.UserCredential;
 import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -63,19 +61,10 @@ public class AuthController {
         response.message = "You are logged with this roles: " + roles.toString();
         AccessToken accessToken = httpTools.getCurrentUser(this.httpRequest);
         if(!httpTools.isInSession(this.httpRequest, "user")){
-
-            Credential credential = new Credential(
-                    new UserCredential(
-                            accessToken.getPreferredUsername(),
-                            accessToken.getSubject(),
-                            ""
-                    )
-            );
+            String credential = accessToken.getPreferredUsername();
             httpTools.setSessionValue(this.httpRequest, "Credential",credential);
         }
-        Credential currentCredential = (Credential) httpTools.getSessionValue(this.httpRequest, "Credential");
-        currentCredential.setClient_id(accessToken.getIssuedFor());
-
+        String currentCredential = (String) httpTools.getSessionValue(this.httpRequest, "Credential");
         response.data = jsonTools.getObjectArray(
                 currentCredential,
                 accessToken
