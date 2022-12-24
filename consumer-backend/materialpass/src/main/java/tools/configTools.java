@@ -34,8 +34,6 @@ public final class configTools {
     private static final String CONFIGURATION_FILE_NAME = "config/configuration.yml";
     private Map<String, Object> configuration;
 
-
-
     public configTools(){
         InputStream fileContent  = fileTools.getResourceContent(this.getClass(), CONFIGURATION_FILE_NAME);
         this.configuration = yamlTools.parseYmlStream(fileContent);
