@@ -14,9 +14,6 @@ import java.util.Arrays;
 import java.util.Map;
 
 public final class jsonTools {
-    private jsonTools() {
-        throw new IllegalStateException("Tool/Utility Class Illegal Initialization");
-    }
 
     public static ArrayList<Object> getObjectArray(Object... data){
         return new ArrayList<>(
