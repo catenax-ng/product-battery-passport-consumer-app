@@ -1,17 +1,18 @@
 package tools;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+@SpringBootTest
 class httpToolsTest {
 
-    @Test
-    void doGet() {
-        assertNotNull(httpTools.doGet("http://localhost:8080/health", String.class, false));
+    @AfterAll
+    static void doGet() {
+        assertInstanceOf(String.class, httpTools.doGet("http://localhost:8080/health", String.class, false).getBody());
     }
-    @Test
-    void doPost() {
-        assertNotNull(httpTools.doPost("http://localhost:8080/health", String.class, false));
+    @AfterAll
+    static void doPost() {
+        assertInstanceOf(String.class, httpTools.doPost("http://localhost:8080/health", String.class, false).getBody());
     }
 }
