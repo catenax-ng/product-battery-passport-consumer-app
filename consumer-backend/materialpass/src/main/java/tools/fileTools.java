@@ -34,9 +34,6 @@ import java.nio.file.Paths;
 
 
 public final class fileTools {
-    private fileTools() {
-        throw new IllegalStateException("Tool/Utility Class Illegal Initialization");
-    }
     public static String toFile(String filePath, String content, Boolean append) throws IOException {
         fileTools.createFile(filePath);
         try(

@@ -32,9 +32,6 @@ import java.io.InputStream;
 import java.util.Map;
 
 public final class yamlTools {
-    private yamlTools() {
-        throw new IllegalStateException("Tool/Utility Class Illegal Initialization");
-    }
     public static Map<String, Object> readFile(String filePath){
         try {
             InputStream inputStream = new FileInputStream(fileTools.newFile(filePath));
