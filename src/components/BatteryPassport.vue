@@ -1,7 +1,6 @@
 <template id="battery-passport-root">
   <Spinner v-if="loading" class="spinner-container" />
   <div v-else>
-    <Header />
     <div data-cy="dashboard-container" class="dashboard-container">
       <div class="titles-container">
         <div class="title">Welcome back {{ name }}!</div>
@@ -14,7 +13,6 @@
 </template>
 
 <script type="text/jsx">
-import Header from "@/components/Header.vue";
 import Spinner from "@/components/Spinner.vue";
 import DashboardTable from "@/components/DashboardTable.vue";
 import { inject } from "vue";
@@ -25,7 +23,7 @@ export default {
   name: "BatteryPassport",
   components: {
     Spinner,
-    Header,
+
     DashboardTable,
   },
   data() {

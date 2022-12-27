@@ -1,7 +1,7 @@
 <template>
   <div class="qr-container">
     <router-link to="/dashboard"> </router-link>
-    <div
+    <!-- <div
       class="toast-alert"
       :class="{
         'display-toast-alert': error,
@@ -13,8 +13,8 @@
           <img :src="Close" alt="close" class="close" />
         </span>
       </h3>
-    </div>
-    <div class="header-container">
+    </div> -->
+    <!-- <div class="header-container">
       <div class="left-menu-wrapper">
         <div class="left-menu-container">
           <router-link to="/dashboard">
@@ -60,7 +60,8 @@
           </span>
         </div>
       </div>
-    </div>
+    </div> -->
+
     <div v-if="!error">
       <div class="qr-frame">
         <img :src="QRFrame" alt="frame" class="frame" />
@@ -72,7 +73,7 @@
         @decode="onDecode"
       ></qrcode-stream>
       <div>
-        <form class="input-form" @submit.prevent="onClick">
+        <!-- <form class="input-form" @submit.prevent="onClick">
           <input
             v-model="typedCode"
             class="input"
@@ -82,15 +83,12 @@
           <button class="submit-btn">
             <img :src="Search" alt="search" />
           </button>
-        </form>
+        </form> -->
       </div>
     </div>
     <div v-else class="error-frame">
       <Spinner class="spinner-container" />
     </div>
-  </div>
-  <div class="footer-container">
-    <Footer />
   </div>
 </template>
 
@@ -102,7 +100,6 @@ import Close from "../assets/close.svg";
 import QRFrame from "../assets/qrFrame.svg";
 import HistoryPage from "../assets/historyPage.svg";
 import Search from "../assets/qrSearch.svg";
-import Footer from "@/components/Footer.vue";
 import Logout from "../assets/logout.png";
 import Profile from "../assets/profile.svg";
 import Notifications from "../assets/notifications.svg";
@@ -114,7 +111,6 @@ export default {
   name: "PassportView",
   components: {
     QrcodeStream,
-    Footer,
     Spinner,
   },
   setup() {
@@ -216,13 +212,19 @@ export default {
 }
 
 .qr-container {
-  position: relative;
+  /* position: relative;
   max-height: 900px;
-  overflow: hidden;
+  overflow: hidden; */
+  position: fixed;
+  z-index: -1;
+  top: 132px;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 .qrcode-stream {
-  max-width: 100%;
+  max-width: 500%;
 }
 
 .header-container {
@@ -313,6 +315,10 @@ export default {
   margin-left: auto;
   margin-right: auto;
   transform: translate(-10%, -5%); */
+}
+
+.qrcode-stream-camera {
+  width: 160%;
 }
 
 .left-menu-container {

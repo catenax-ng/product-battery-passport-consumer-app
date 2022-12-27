@@ -1,55 +1,19 @@
 <template>
-  <div v-if="hamburgerMenu" class="hamburger-menu">
-    <h3 v-if="hamburgerMenu" class="links">Settings</h3>
-    <h3 v-if="hamburgerMenu" class="links">Notifications</h3>
-    <h3 v-if="hamburgerMenu" class="links" @click="profileMenu = !profileMenu">
-      Profile
-    </h3>
-    <div v-if="profileMenu" class="profile-menu-mobile">
-      <!-- <img :src="Profile" alt="profile" class="" /> -->
-      <span class="mobile-menu-links">
-        {{ username }}
-        <p class="">{{ role }}</p>
-      </span>
-      <span class="mobile-menu-links" @click="logout"> Sign out </span>
-    </div>
-  </div>
   <div>
-    <div class="header-container profile-container">
+    <div class="header-container">
       <div class="logo-container">
         <router-link to="/">
           <img :src="CatenaLogo" alt="logo" class="logo" />
-          <img :src="CatenaLogoType" alt="logotype" class="logo-type" />
         </router-link>
       </div>
-      <div class="toggle-button" @click="hamburgerMenu = !hamburgerMenu">
-        <span class="bar" :class="hamburgerMenu ? 'white-bar' : ''"></span>
-        <span class="bar" :class="hamburgerMenu ? 'white-bar' : ''"></span>
-        <span class="bar" :class="hamburgerMenu ? 'white-bar' : ''"></span>
-      </div>
+      <v-container>
+        <v-tabs v-model="tab">
+          <v-tab value="one">History page</v-tab>
+          <v-tab value="two">QR code scanner</v-tab>
+        </v-tabs>
+      </v-container>
       <div class="right-manu-wrapper">
         <div class="right-menu-container">
-          <router-link to="/">
-            <div class="tooltip">
-              <img :src="QRScanner" alt="QRScanner" class="buttons" />
-
-              <v-tooltip activator="parent" location="bottom"
-                >QR code scanner</v-tooltip
-              >
-            </div>
-          </router-link>
-          <div class="tooltip">
-            <img :src="Settings" alt="settings" class="buttons" />
-
-            <v-tooltip activator="parent" location="bottom">Settings</v-tooltip>
-          </div>
-          <div class="tooltip">
-            <img :src="Notifications" alt="profile" class="buttons" />
-
-            <v-tooltip activator="parent" location="bottom"
-              >Notifications</v-tooltip
-            >
-          </div>
           <span>
             <span @mouseover="profileHover = true">
               <img :src="Profile" alt="profile" class="buttons" />
@@ -75,6 +39,19 @@
         </div>
       </div>
     </div>
+    <v-container>
+      <v-window v-model="tab">
+        <v-main>
+          <v-window-item value="one">
+            <BatteryPassport />
+          </v-window-item>
+          <v-window-item value="two">
+            <div class="ghost"></div>
+            <QRScanner />
+          </v-window-item>
+        </v-main>
+      </v-window>
+    </v-container>
     <div v-if="batteryId" class="id-container">
       <div class="id-wrapper">
         <h1>
@@ -128,40 +105,49 @@
         />
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import CatenaLogoType from "../assets/logotype.png";
-import CatenaLogo from "../assets/logo.png";
+import CatenaLogo from "../assets/Catena-X_Logo_mit_Zusatz_2021.svg";
 import Profile from "../assets/profile.svg";
 import Notifications from "../assets/notifications.svg";
 import Settings from "../assets/settings.svg";
-import QRScanner from "../assets/qr-icon.svg";
+import QRScannerIcon from "../assets/qr-icon.svg";
 import QrCode from "../assets/BMW_test-battery-1.svg";
 import IMR18650V1 from "../assets/IMR18650V1.svg";
 import X123456789012X12345678901234566 from "../assets/X123456789012X12345678901234566.svg";
 import NCR186850B from "../assets/NCR186850B.svg";
-
+import QRScanner from "../views/QRScanner.vue";
+import BatteryPassport from "../components/BatteryPassport.vue";
+import Footer from "../components/Footer.vue";
 import Logout from "../assets/logout.png";
 import { inject } from "vue";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Header",
+  components: {
+    QRScanner,
+    BatteryPassport,
+    Footer,
+  },
   props: {
     batteryId: {
       type: Object,
       default: null,
     },
   },
+
   setup() {
     return {
       CatenaLogoType,
       CatenaLogo,
       Profile,
       Notifications,
-      QRScanner,
+      QRScannerIcon,
       Settings,
       QrCode,
       IMR18650V1,
@@ -170,6 +156,7 @@ export default {
       Logout,
     };
   },
+
   data() {
     return {
       profileHover: false,
@@ -178,6 +165,7 @@ export default {
       username: "",
       role: "",
       auth: inject("authentication"),
+      tab: null,
     };
   },
   mounted() {
@@ -231,21 +219,28 @@ h1 {
   font-weight: bold;
 }
 
+.ghost {
+  height: 54vh;
+}
+
 .header-container {
   display: flex;
-  width: 76%;
-  margin: 4% 12% 0 12%;
+  width: 100%;
+  margin: 30px 12% 0 0;
+  padding: 0 4% 20px;
+  border-bottom: 2px solid lightgray;
 }
 
 .logo-container {
   display: relative;
-  width: 50%;
+  width: 20%;
+  padding-top: 10px;
 }
 
 .logo {
   position: absolute;
-  height: 49px;
-  left: -56px;
+  height: 40px;
+  left: 40px;
 }
 
 .logo-type {
@@ -263,7 +258,7 @@ h1 {
 }
 
 .right-manu-wrapper {
-  width: 50%;
+  width: 20%;
   display: flex;
   justify-content: flex-end;
 }
@@ -282,8 +277,6 @@ h1 {
 }
 
 .buttons {
-  width: 26px;
-  height: 26px;
   margin: 15px 0 0 30px;
   cursor: pointer;
 }

@@ -28,6 +28,11 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-image: url(https://portal.dev.demo.catena-x.net/assets/images/frame/Home.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  overflow-x: hidden;
 }
 
 .table-borderless > :not(caption) > * > * {
