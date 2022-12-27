@@ -65,20 +65,6 @@ export default {
 </script>
 
 <style scoped>
-.section-content {
-  display: flex;
-  width: 100%;
-  border: solid 1px #b3cb2d;
-  border-radius: 0 0 4px 4px;
-  background-color: #fff;
-  margin-bottom: 50px;
-}
-
-.sub-section-container {
-  width: 33%;
-  border-bottom: solid 1px #edefe5;
-}
-
 .field-container {
   display: flex;
   flex-direction: column;

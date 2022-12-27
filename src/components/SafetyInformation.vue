@@ -108,14 +108,6 @@ export default {
 </script>
 
 <style scoped>
-.section-content {
-  width: 100%;
-  border: solid 1px #b3cb2d;
-  border-radius: 0 0 4px 4px;
-  background-color: #fff;
-  margin-bottom: 50px;
-}
-
 .icon {
   width: 27px;
   height: 36px;
@@ -132,12 +124,6 @@ export default {
   min-height: 120px;
   cursor: pointer;
   padding: 20px 0 60px 0;
-}
-
-.sub-section-container {
-  display: flex;
-  flex-wrap: wrap;
-  border-bottom: solid 1px #edefe5;
 }
 
 .field-value {

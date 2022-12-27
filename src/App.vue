@@ -3,9 +3,8 @@
 </template>
 
 <script>
-
 export default {
-  name: 'App',
+  name: "App",
 };
 </script>
 
@@ -27,7 +26,7 @@ export default {
   min-height: 100vh;
 }
 
-.table-borderless> :not(caption)>*>* {
+.table-borderless > :not(caption) > * > * {
   border-bottom-width: 0;
   padding-left: 40px !important;
 }
@@ -40,7 +39,7 @@ export default {
   background-color: rgba(179, 203, 44, 0.05);
 }
 
-.table>thead {
+.table > thead {
   vertical-align: bottom;
   color: gray;
   font-size: 12px;
@@ -57,5 +56,19 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.section-content {
+  width: 100%;
+  border: solid 1px #b3cb2d;
+  border-radius: 0 0 4px 4px;
+  background-color: #fff;
+  margin-bottom: 50px;
+}
+
+.sub-section-container {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: solid 1px #edefe5;
 }
 </style>
