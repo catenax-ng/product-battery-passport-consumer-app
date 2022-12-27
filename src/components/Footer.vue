@@ -70,6 +70,7 @@ export default {
 
   .links-wrapper {
     flex-direction: column;
+    align-items: center;
     width: 100%;
     padding: 18px 0;
   }
@@ -81,10 +82,6 @@ export default {
     width: 100%;
     min-height: 185px;
     margin: 0;
-  }
-
-  .links-wrapper {
-    align-items: center;
   }
 
   .buttons {

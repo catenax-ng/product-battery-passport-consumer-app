@@ -69,17 +69,14 @@ export default {
 @media (max-width: 750px) {
   .section-header {
     border-radius: 0;
+    border: none;
+    border-top: solid 1px #b3cb2d;
+    border-bottom: solid 1px #b3cb2d;
   }
 
   .section-title {
     font-size: 20px;
     margin: 22px 0px 22px 30px;
-  }
-
-  .section-header {
-    border: none;
-    border-top: solid 1px #b3cb2d;
-    border-bottom: solid 1px #b3cb2d;
   }
 }
 </style>
