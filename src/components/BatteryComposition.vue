@@ -119,20 +119,6 @@ export default {
 </script>
 
 <style scoped>
-.section-content {
-  width: 100%;
-  border: solid 1px #b3cb2d;
-  border-radius: 0 0 4px 4px;
-  background-color: #fff;
-  margin-bottom: 50px;
-}
-
-.sub-section-container {
-  display: flex;
-  flex-wrap: wrap;
-  border-bottom: solid 1px #edefe5;
-}
-
 .field-container {
   display: flex;
   flex-direction: column;
@@ -179,9 +165,6 @@ li {
 @media (max-width: 750px) {
   .section-content {
     border: none;
-  }
-
-  .section-content {
     margin-bottom: 0;
   }
 
@@ -192,11 +175,6 @@ li {
   .list-container {
     width: 100%;
     padding-left: 50px;
-  }
-
-  .section-content {
-    border: none;
-    margin-bottom: 0;
   }
 
   .sub-title-container {

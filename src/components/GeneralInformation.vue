@@ -127,22 +127,8 @@ export default {
   width: 100% !important;
 }
 
-.sub-section-container {
-  display: flex;
-  flex-wrap: wrap;
-  border-bottom: solid 1px #edefe5;
-}
-
 .two-third-width {
   width: 66% !important;
-}
-
-.section-content {
-  width: 100%;
-  border: solid 1px #b3cb2d;
-  border-radius: 0 0 4px 4px;
-  background-color: #fff;
-  margin-bottom: 50px;
 }
 
 .hidden {
@@ -156,9 +142,6 @@ export default {
 @media (max-width: 750px) {
   .section-content {
     border: none;
-  }
-
-  .section-content {
     margin-bottom: 0;
   }
 

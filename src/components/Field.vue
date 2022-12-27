@@ -143,7 +143,7 @@ a {
 
   .test {
     font-size: 12px;
-    padding: 4px 0 4px 40px;
+    padding: 0 0 0 50px;
   }
 
   .test-container {
@@ -171,10 +171,6 @@ a {
     font-size: 16px;
     line-height: 16px;
     font-weight: bold;
-  }
-
-  .test {
-    padding: 0 0 0 50px;
   }
 }
 </style>
