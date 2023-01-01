@@ -6,7 +6,7 @@
           <img :src="CatenaLogo" alt="logo" class="logo" />
         </router-link>
       </div>
-      <v-container>
+      <v-container class="tabs">
         <v-tabs v-model="tab">
           <v-tab value="one">History page</v-tab>
           <v-tab value="two">QR code scanner</v-tab>
@@ -14,28 +14,27 @@
       </v-container>
       <div class="right-manu-wrapper">
         <div class="right-menu-container">
-          <span>
-            <span @mouseover="profileHover = true">
-              <img :src="Profile" alt="profile" class="buttons" />
-            </span>
-            <div
-              v-if="profileHover"
-              class="profile-menu"
-              @mouseleave="profileHover = false"
-            >
-              <div class="menu-btn">
-                <img :src="Profile" alt="profile" class="menu-profile" />
-                <!--TODO: Profile page onClick-->
+          <v-menu>
+            <template #activator="{ props }">
+              <img
+                v-bind="props"
+                :src="Profile"
+                alt="profile"
+                class="buttons"
+              />
+            </template>
+            <v-list class="dropdown v-list" rounded="m">
+              <div class="profile-menu-header">
                 <span class="profile-text">
                   {{ username }}
-                  <p>{{ role }}</p>
+                  <p class="role">{{ role }}</p>
                 </span>
               </div>
               <div class="menu-btn">
-                <span class="profile-text" @click="logout">Sign out</span>
+                <span class="profile-text" @click="logout">Logout</span>
               </div>
-            </div>
-          </span>
+            </v-list>
+          </v-menu>
         </div>
       </div>
     </div>
@@ -173,6 +172,7 @@ export default {
       this.username = this.auth.getUserName();
       this.role = this.auth.getRole();
     }
+    console.log("user hello", this.username);
   },
   methods: {
     logout() {
@@ -191,36 +191,18 @@ export default {
   display: inline-block;
 }
 
-/* .tooltip .tooltiptext {
-  visibility: hidden;
-  width: max-content;
-  background-color: #3d3d3d;
-  box-shadow: 3px 4px 6px 0px #bebebe;
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: bold;
-  text-align: center;
-  border-radius: 6px;
-  padding: 7px 15px;
-
-
-  position: absolute;
-  z-index: 1;
-  top: 65px;
-  transform: translate(-60%, -50%);
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-} 
-*/
-
 h1 {
   font-weight: bold;
 }
 
 .ghost {
   height: 54vh;
+}
+
+.dropdown {
+  margin-top: 20px;
+  width: 256px;
+  border-radius: 16px;
 }
 
 .header-container {
@@ -232,15 +214,18 @@ h1 {
 }
 
 .logo-container {
-  display: relative;
-  width: 20%;
   padding-top: 10px;
 }
 
 .logo {
-  position: absolute;
   height: 40px;
   left: 40px;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo-type {
@@ -285,19 +270,26 @@ h1 {
   position: relative;
 }
 
-.profile-menu {
-  position: absolute;
-  min-width: 342px;
-  border: solid 1px #ffa600;
-  right: 0;
-  background-color: white;
-  cursor: pointer;
+.profile-menu-header {
+  background-color: #f3f3f3;
+  border-radius: 16px 16px 0 0;
+  padding: 17px 0 0 0;
+}
+
+.v-list {
+  border-radius: 16px;
+  padding: 0;
+}
+
+.role {
+  padding: 3px 0 16px 24px;
+  font-size: 14px;
+  color: #888888;
 }
 
 .menu-btn {
   display: flex;
-  border-top: solid 1px #ffa600;
-  padding: 16px;
+  border-top: 1px solid #dcdcdc;
   align-items: center;
 }
 
@@ -306,13 +298,15 @@ h1 {
 }
 
 .menu-btn:hover {
-  background-color: #f8f9fa;
+  background: rgba(15, 113, 203, 0.05);
+  border-radius: 10px;
+  color: #0d55af;
 }
 
 .profile-text {
-  padding: 0 16px 0 12px;
-  font-size: 18px;
-  font-weight: bold;
+  padding: 17px 0 35px 24px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 p {
@@ -418,14 +412,14 @@ p {
     width: 100%;
     justify-content: center;
     align-items: center;
-    border: solid 1px #b3cb2c;
+    border: 1px solid #dcdcdc;
   }
 
   .mobile-menu-links {
     text-align: center;
     font-weight: bold;
     font-size: 16px;
-    border-bottom: solid 1px #b3cb2c;
+    border: 1px solid #dcdcdc;
     width: 100%;
     min-height: 60px;
     padding: 16px 0 0 0px;
