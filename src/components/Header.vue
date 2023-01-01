@@ -7,7 +7,7 @@
         </router-link>
       </div>
       <v-container class="tabs">
-        <v-tabs v-model="tab">
+        <v-tabs v-model="tab" :class="batteryId ? 'no-tabs' : ''">
           <v-tab value="one">History page</v-tab>
           <v-tab value="two">QR code scanner</v-tab>
         </v-tabs>
@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <v-container>
+    <v-container v-if="!batteryId">
       <v-window v-model="tab">
         <v-main>
           <v-window-item value="one">
@@ -104,7 +104,7 @@
         />
       </div>
     </div>
-    <Footer />
+    <Footer v-if="!batteryId" />
   </div>
 </template>
 
@@ -227,6 +227,10 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.no-tabs {
+  display: none;
 }
 
 .logo-type {

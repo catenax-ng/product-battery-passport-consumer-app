@@ -39,6 +39,7 @@ import BatteryComposition from "@/components/BatteryComposition.vue";
 import StateOfBattery from "@/components/StateOfBattery.vue";
 import Documents from "@/components/Documents.vue";
 import Spinner from "@/components/Spinner.vue";
+import Passport from "@/assets/MOCK/passportExample03.json";
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 import { API_KEY } from "@/services/service.const";
@@ -70,7 +71,8 @@ export default {
   async created() {
     //this.loading = false;
     //let assetIds = this.$route.params.assetIds;
-    this.data = await this.getPassport(this.passId);
+    this.data = Passport;
+    // this.data = await this.getPassport(this.passId);
     this.loading = false;
   },
   methods: {
