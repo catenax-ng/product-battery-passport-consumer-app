@@ -1,67 +1,19 @@
 <template>
   <div class="qr-container">
     <router-link to="/dashboard"> </router-link>
-    <!-- <div
-      class="toast-alert"
-      :class="{
-        'display-toast-alert': error,
-      }"
-    >
-      <h3 class="error-message">
-        {{ error }}
-        <span @click="error = !error">
-          <img :src="Close" alt="close" class="close" />
-        </span>
-      </h3>
-    </div> -->
-    <!-- <div class="header-container">
-      <div class="left-menu-wrapper">
-        <div class="left-menu-container">
-          <router-link to="/dashboard">
-            <div class="tooltip">
-              <img :src="HistoryPage" alt="history" />
-              <v-tooltip activator="parent" location="bottom"
-                >History page</v-tooltip
-              >
-            </div>
-          </router-link>
-          <h2 class="top-layer">Scan QR code</h2>
-          <div class="top-layer" @click="torch = !torch">
-            <img :src="Flesh" alt="flesh" />
-            <v-tooltip activator="parent" location="bottom">Flesh</v-tooltip>
-          </div>
-        </div>
-      </div>
-      <div class="right-manu-wrapper">
-        <div class="right-menu-container">
-          <img :src="Settings" alt="settings" class="buttons" />
-          <img :src="Notifications" alt="profile" class="buttons" />
-          <span>
-            <span @mouseover="hover = true">
-              <img
-                :src="Profile"
-                alt="profile"
-                class="buttons"
-                title="User profile"
-              />
-            </span>
-            <div v-if="hover" class="profile-menu" @mouseleave="hover = false">
-              <div class="menu-btn">
-                <img :src="Profile" alt="profile" class="menu-profile" />
-                <span class="profile-text">
-                  {{ username }}
-                  <p>{{ role }}</p>
-                </span>
-              </div>
-              <div class="menu-btn">
-                <span class="profile-text" @click="logout">Sign out</span>
-              </div>
-            </div>
-          </span>
-        </div>
-      </div>
-    </div> -->
 
+    <v-snackbar
+      v-if="error ? (snackbar = true) : (snackbar = false)"
+      v-model="snackbar"
+      top
+    >
+      {{ error }}
+      <template #actions>
+        <v-btn color="dark-grey" variant="text" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
     <div v-if="!error">
       <div class="qr-frame">
         <img :src="QRFrame" alt="frame" class="frame" />
@@ -132,6 +84,7 @@ export default {
     return {
       hover: false,
       error: "",
+      snackbar: false,
       decodedString: "",
       torch: false,
       MATERIAL_URL: process.env.VUE_APP_MATERIAL_URL,
@@ -212,9 +165,6 @@ export default {
 }
 
 .qr-container {
-  /* position: relative;
-  max-height: 900px;
-  overflow: hidden; */
   position: fixed;
   z-index: -1;
   top: 132px;
@@ -307,14 +257,6 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-  /* position: absolute;
-  width: 20%;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  transform: translate(-10%, -5%); */
 }
 
 .qrcode-stream-camera {

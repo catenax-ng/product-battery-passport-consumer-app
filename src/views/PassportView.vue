@@ -71,8 +71,7 @@ export default {
   async created() {
     //this.loading = false;
     //let assetIds = this.$route.params.assetIds;
-    this.data = Passport;
-    // this.data = await this.getPassport(this.passId);
+    this.data = await this.getPassport(this.passId);
     this.loading = false;
   },
   methods: {
