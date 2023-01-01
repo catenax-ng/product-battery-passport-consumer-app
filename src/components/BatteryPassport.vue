@@ -14,7 +14,7 @@
 
 <script type="text/jsx">
 import Spinner from "@/components/Spinner.vue";
-import DashboardTable from "@/components/DashboardTable.vue";
+import DashboardTable from "@/components/DashboardTableCopy.vue";
 import { inject } from "vue";
 
 let listBatteryProviders = require("../assets/providers.json");

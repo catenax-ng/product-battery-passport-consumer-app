@@ -23,7 +23,7 @@
                 class="buttons"
               />
             </template>
-            <v-list class="dropdown v-list" rounded="m">
+            <v-list class="dropdown" rounded="xl">
               <div class="profile-menu-header">
                 <span class="profile-text">
                   {{ username }}
@@ -201,8 +201,9 @@ h1 {
 
 .dropdown {
   margin-top: 20px;
-  width: 256px;
   border-radius: 16px;
+  width: 256px;
+  padding: 0;
 }
 
 .header-container {
@@ -276,11 +277,6 @@ h1 {
   padding: 17px 0 0 0;
 }
 
-.v-list {
-  border-radius: 16px;
-  padding: 0;
-}
-
 .role {
   padding: 3px 0 16px 24px;
   font-size: 14px;
@@ -299,7 +295,6 @@ h1 {
 
 .menu-btn:hover {
   background: rgba(15, 113, 203, 0.05);
-  border-radius: 10px;
   color: #0d55af;
 }
 

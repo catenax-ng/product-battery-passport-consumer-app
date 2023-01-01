@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Spinner from "../assets/spinner.svg";
+import Spinner from "../assets/spinner.gif";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Spinner",
@@ -17,7 +17,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .spinner-container {
   width: 100vw;
   height: 100vh;
