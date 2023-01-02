@@ -7,7 +7,6 @@ import tools.logTools;
 
 @Component
 public class AppListener {
-
     @EventListener(ApplicationReadyEvent.class)
     public void onStartUp() {
         String serverStartUpMessage = "\n\n" +
@@ -19,7 +18,7 @@ public class AppListener {
                 "\n\n-------------> [ SERVER STARTED ] <-------------\n" +
                 "Listening to requests...\n\n";
 
-        System.out.print(serverStartUpMessage);
+        logTools.printMessage(serverStartUpMessage);
         logTools.printMessage("[ LOGGING STARTED ] <-----------------------------------------");
         logTools.printMessage("Creating log file...");
     }

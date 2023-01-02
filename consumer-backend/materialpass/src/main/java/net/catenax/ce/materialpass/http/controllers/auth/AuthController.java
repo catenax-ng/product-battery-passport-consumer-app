@@ -24,9 +24,7 @@
 
 package net.catenax.ce.materialpass.http.controllers.auth;
 
-import net.catenax.ce.materialpass.models.Credential;
 import net.catenax.ce.materialpass.models.Response;
-import net.catenax.ce.materialpass.models.UserCredential;
 import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -49,11 +47,11 @@ public class AuthController {
 
     private @Autowired HttpServletRequest httpRequest;
     private @Autowired HttpServletResponse httpResponse;
-    final static String clientIdPath = "keycloak.resource";
+    static final String CLIENT_ID_PATH = "keycloak.resource";
 
     private Response loginFromHttpRequest(){
         Response response = httpTools.getResponse();
-        Set<String> roles = httpTools.getCurrentUserClientRoles(this.httpRequest,env.getProperty(clientIdPath));
+        Set<String> roles = httpTools.getCurrentUserClientRoles(this.httpRequest,env.getProperty(CLIENT_ID_PATH));
 
         if(roles == null) {
             response.message = "You have no assigned roles!";
@@ -63,20 +61,10 @@ public class AuthController {
         response.message = "You are logged with this roles: " + roles.toString();
         AccessToken accessToken = httpTools.getCurrentUser(this.httpRequest);
         if(!httpTools.isInSession(this.httpRequest, "user")){
-
-            // TODO: Get client credentials from hashiCorpVault
-            Credential Credential = new Credential(
-                    new UserCredential(
-                            accessToken.getPreferredUsername(),
-                            accessToken.getSubject(),
-                            ""
-                    )
-            );
-            httpTools.setSessionValue(this.httpRequest, "Credential",Credential);
+            String credential = accessToken.getPreferredUsername();
+            httpTools.setSessionValue(this.httpRequest, "Credential",credential);
         }
-        Credential currentCredential = (Credential) httpTools.getSessionValue(this.httpRequest, "Credential");
-        currentCredential.setClient_id(accessToken.getIssuedFor());
-
+        String currentCredential = (String) httpTools.getSessionValue(this.httpRequest, "Credential");
         response.data = jsonTools.getObjectArray(
                 currentCredential,
                 accessToken
@@ -90,7 +78,7 @@ public class AuthController {
     /*
      */
     @RequestMapping(method = RequestMethod.GET)
-    Response index() throws Exception{
+    Response index(){
         httpTools.redirect(httpResponse,"/auth/login");
         return httpTools.getResponse("Redirect to Login");
     }
@@ -108,7 +96,7 @@ public class AuthController {
         return httpTools.getResponse(check ? "User Authenticated":"User not Authenticated", check);
     }
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    Response login() throws Exception{
+    Response login(){
         return loginFromHttpRequest();
     }
 
@@ -116,7 +104,7 @@ public class AuthController {
     public Response recycler(){
         Response response = httpTools.getResponse();
 
-        Set<String> roles = httpTools.getCurrentUserClientRoles(httpRequest,env.getProperty("keycloak.resource"));
+        Set<String> roles = httpTools.getCurrentUserClientRoles(httpRequest,env.getProperty(CLIENT_ID_PATH));
         response.message = "You are logged in as Recycler role | " + "This are the received roles " + roles.toString();
         return response;
     }
@@ -125,7 +113,7 @@ public class AuthController {
     public Response oem(){
         Response response = httpTools.getResponse();
 
-        Set<String> roles = httpTools.getCurrentUserClientRoles(httpRequest,env.getProperty("keycloak.resource"));
+        Set<String> roles = httpTools.getCurrentUserClientRoles(httpRequest,env.getProperty(CLIENT_ID_PATH));
         response.message = "You are logged in as OEM role | " + "This are the received roles " + roles;
         return response;
     }

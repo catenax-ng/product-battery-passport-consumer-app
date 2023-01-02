@@ -32,6 +32,9 @@ import org.springframework.core.task.TaskExecutor;
 
 import java.util.Map;
 public final class logTools {
+    //private logTools() {
+        //throw new IllegalStateException("Tool/Utility Class Illegal Initialization");
+    //}
 
     /**
      * Static Tools to print logs with format and current date.
@@ -40,11 +43,11 @@ public final class logTools {
     @Autowired
     private TaskExecutor taskExecutor;
     public static final configTools configuration = new configTools();
-    public static final String absoluteLogPath = logTools.getLogPath();
+    public static final String ABSOLUTE_LOG_PATH = logTools.getLogPath();
     static Logger logger = LogManager.getLogger(logTools.class);
     private static final Level INFO = Level.forName("INFO", 400);
-    private static final Level HTTP = Level.forName("HTTP", 450);
-    private static final Level DEBUG = Level.forName("DEBUG", 500);
+    private static final Level HTTP = Level.forName("HTTP", 420);
+    private static final Level DEBUG = Level.forName("DEBUGGER", 450);
     private static final Level EXCEPTION = Level.forName( "EXCEPTION", 100);
     private static final Level WARNING = Level.forName("WARNING", 300);
     private static final Level ERROR = Level.forName("ERROR", 200);
@@ -73,6 +76,7 @@ public final class logTools {
         Integer assignedLevel = LOGLEVELS.get(logLevel);
         return currentLevel >= assignedLevel;
     }
+
     public static void printMessage(String strMessage){
         Level logLevel = INFO;
         if(!logTools.checkLogLevel(logLevel)){
@@ -147,9 +151,9 @@ public final class logTools {
         }
         public void run() {
            try {
-               fileTools.toFile(absoluteLogPath, logMessage, true);
+               fileTools.toFile(ABSOLUTE_LOG_PATH, logMessage, true);
            }catch (Exception e){
-               logger.log(EXCEPTION, "It was not possible to write log message to file "+ absoluteLogPath, e);
+               logger.log(EXCEPTION, "It was not possible to write log message to file "+ ABSOLUTE_LOG_PATH, e);
            }
         }
 

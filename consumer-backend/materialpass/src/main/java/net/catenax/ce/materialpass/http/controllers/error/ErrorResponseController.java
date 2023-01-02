@@ -31,6 +31,7 @@ import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.ServletWebRequest;
 import tools.httpTools;
@@ -41,11 +42,11 @@ import java.util.Map;
 
 @Controller
 public class ErrorResponseController implements ErrorController {
-    
+
     @Autowired
     private ErrorAttributes errorAttributes;
 
-    @RequestMapping("/error")
+    @RequestMapping(value = "/error", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public Response handleError(HttpServletRequest httpRequest) {
         ErrorAttributeOptions options = ErrorAttributeOptions
@@ -53,8 +54,8 @@ public class ErrorResponseController implements ErrorController {
                 .including(ErrorAttributeOptions.Include.MESSAGE)
                 ;
         ServletWebRequest servletWebRequest = new ServletWebRequest(httpRequest);
-        Map<String, Object> errorAttributes = this.errorAttributes.getErrorAttributes(servletWebRequest, options);
-        Response response = new Response().mapError(errorAttributes);
+        Map<String, Object> errors = this.errorAttributes.getErrorAttributes(servletWebRequest, options);
+        Response response = new Response().mapError(errors);
         String httpInfo = httpTools.getHttpInfo(httpRequest, response.getStatus());
         logTools.printHTTPMessage(httpInfo + " " + response.errorString());
         return response;

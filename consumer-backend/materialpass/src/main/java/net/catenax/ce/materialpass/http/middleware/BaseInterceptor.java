@@ -35,11 +35,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class BaseInterceptor implements HandlerInterceptor {
-
-
     @Override
     public boolean preHandle(
-        HttpServletRequest httpRequest, HttpServletResponse httpResponse, Object handler) throws Exception {
+        HttpServletRequest httpRequest, HttpServletResponse httpResponse, Object handler) {
         if(!httpRequest.getRequestURI().equals("/error")) {
             String httpInfo = httpTools.getHttpInfo(httpRequest, httpResponse.getStatus());
             logTools.printHTTPMessage(httpInfo);
@@ -48,13 +46,16 @@ public class BaseInterceptor implements HandlerInterceptor {
     }
     @Override
     public void postHandle(
+
             HttpServletRequest request, HttpServletResponse response, Object handler,
-            ModelAndView modelAndView) throws Exception {
+            ModelAndView modelAndView) {
+        //[NOTE]: Post Handle not implemented!
     }
 
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
-                                Object handler, Exception exception) throws Exception{
+                                Object handler, Exception exception){
+        //[NOTE]: After Completion not implemented!
     }
 }

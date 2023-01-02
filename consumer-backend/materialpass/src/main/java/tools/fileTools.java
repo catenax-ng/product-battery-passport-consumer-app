@@ -34,17 +34,16 @@ import java.nio.file.Paths;
 
 
 public final class fileTools {
-
-    public static String toFile(String filePath, String content, Boolean append){
-        try {
-            fileTools.createFile(filePath);
-            FileWriter fw = new FileWriter(filePath,append);
+    public static String toFile(String filePath, String content, Boolean append) throws IOException {
+        fileTools.createFile(filePath);
+        try(
+            FileWriter fw = new FileWriter(filePath,append)
+        ){
             fw.write(content);
-            fw.close();
         }
-        catch(IOException ioe)
+        catch(Exception ioe)
         {
-            logTools.printException(ioe, "It was not possible to create file ["+filePath+"]");
+            throw new ToolException(fileTools.class, ioe, "It was not possible to create file ["+filePath+"]");
         }
         return filePath;
     }
@@ -136,25 +135,33 @@ public final class fileTools {
 
             try {
                 if(!fileTools.pathExists(path)) {
-                    logTools.printError("It was not possible to read file [" + path + "]!");
+                    logTools.printError("The file does not exists in [" + path + "]!");
                     return null;
                 }
                 return new String(Files.readAllBytes(Paths.get(path)));
             } catch (Exception e) {
-                throw new ToolException(fileTools.class, "It was not possible to read file [" + path + "]");
+                throw new ToolException(fileTools.class, "It was not possible to read file in [" + path + "]");
             }
 
+    }
+
+    public static String getRootPath(){
+        try {
+            return System.getProperty("user.dir");
+        } catch (Exception e) {
+            throw new ToolException(fileTools.class, "It was not possible to get root path");
+        }
     }
     public static String readFile(Path path){
 
         try {
             if(!fileTools.pathExists(path)) {
-                logTools.printError("It was not possible to read file [" + path + "]!");
+                logTools.printError("The file does not exists in path [" + path.toString() + "]!");
                 return null;
             }
             return new String(Files.readAllBytes(path));
         } catch (Exception e) {
-            throw new ToolException(fileTools.class, "It was not possible to read file [" + path + "]");
+            throw new ToolException(fileTools.class, "It was not possible to read file in path [" + path + "]");
         }
 
     }

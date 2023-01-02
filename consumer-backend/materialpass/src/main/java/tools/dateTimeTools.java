@@ -27,13 +27,12 @@ package tools;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class dateTimeTools {
+public final class dateTimeTools {
 
     /**
      * Static tools to get current dateTime used for logging.
      *
      */
-
     public static String getDateTimeFormatted(String pattern){
         String defaultPattern = "dd/MM/yyyy HH:mm:ss.SSS";
         if(pattern == null){

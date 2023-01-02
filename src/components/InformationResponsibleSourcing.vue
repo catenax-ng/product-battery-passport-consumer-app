@@ -53,14 +53,6 @@ export default {
 </script>
 
 <style scoped>
-.section-content {
-  width: 100%;
-  border: solid 1px #b3cb2d;
-  border-radius: 0 0 4px 4px;
-  background-color: #fff;
-  margin-bottom: 50px;
-}
-
 .icon {
   width: 27px;
   height: 36px;
@@ -79,12 +71,6 @@ export default {
   padding: 20px 0 60px 0;
 }
 
-.sub-section-container {
-  display: flex;
-  flex-wrap: wrap;
-  border-bottom: solid 1px #edefe5;
-}
-
 .field-value {
   font-size: 14px;
   line-height: 20px;
@@ -98,9 +84,6 @@ export default {
 @media (max-width: 750px) {
   .section-content {
     border: none;
-  }
-
-  .section-content {
     margin-bottom: 0;
   }
 
