@@ -17,8 +17,9 @@
 	<properties>
 		<!--<java.version>19</java.version> !-->
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/target/jacoco-report/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <sonar.organization>catenax-ng</sonar.organization>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.projectKey>catenax-ng_product-battery-passport-consumer-app</sonar.projectKey>
         <jacoco.version>0.8.7</jacoco.version>
 	</properties>
