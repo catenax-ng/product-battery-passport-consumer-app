@@ -3,16 +3,17 @@
     <router-link to="/dashboard"> </router-link>
 
     <v-snackbar
+    
       v-if="error ? (snackbar = true) : (snackbar = false)"
       v-model="snackbar"
-      top
+      location="top"
+      content-class="snackbar"
+      variant="plain"
+     
+      
+      
     >
       {{ error }}
-      <template #actions>
-        <v-btn color="dark-grey" variant="text" @click="snackbar = false">
-          Close
-        </v-btn>
-      </template>
     </v-snackbar>
     <div v-if="!error">
       <div class="qr-frame">
@@ -156,6 +157,8 @@ export default {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+
 
 .error-frame {
   display: flex;

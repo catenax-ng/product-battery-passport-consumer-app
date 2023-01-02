@@ -79,4 +79,12 @@ nav a.router-link-exact-active {
   flex-wrap: wrap;
   border-bottom: solid 1px #edefe5;
 }
+
+.snackbar {
+  border: 1px solid #676bc6;
+  border-radius: 8px;
+  background-color: white;
+  font-weight: 400;
+  margin-top: 25px;
+}
 </style>
