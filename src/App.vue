@@ -66,4 +66,17 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.section-content {
+  width: 100%;
+  border: solid 1px #b3cb2d;
+  border-radius: 0 0 4px 4px;
+  background-color: #fff;
+  margin-bottom: 50px;
+}
+.sub-section-container {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: solid 1px #edefe5;
+}
 </style>
