@@ -24,9 +24,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: docker
+    # defaults:
+    #   run:
+    #     working-directory: docker
 
     steps:
       - name: Checkout repository
@@ -57,10 +57,10 @@ jobs:
           java-version: '${{ env.JAVA_VERSION }}'
           distribution: 'adopt'
       
-      - name:  build-consumer-backend-with-maven
+      - name:  Build consumer backend with maven
         run: |
           cd consumer-backend/materialpass
-          mvn clean install
+          mvn -B clean install
         
       - name: Build and push
         id: build-and-push-backend
