@@ -18,6 +18,7 @@ env:
   IMAGE_NAME: "consumer-ui"
   CONSUMER_BACKEND_IMAGE_NAME: "consumer-backend"
   IMAGE_TAG: ${{ github.sha }}
+  JAVA_VERSION: 17
     
 jobs:
   build:
@@ -48,6 +49,14 @@ jobs:
       #   with:
       #     push: true
       #     tags: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      - name: Build with Maven
+        id: build-consumer-backend-with-maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: '${{ env.JAVA_VERSION }}'
+          distribution: 'adopt'
+          context: consumer-backend/materialpass
+        run: mvn clean install
 
       - name: Build and push
         id: build-and-push-backend
