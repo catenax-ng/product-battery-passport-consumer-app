@@ -8,7 +8,7 @@ name: "Publish docker images"
 on:
   push:
 
-    branches: [ "main", "develop" ]
+    branches: [ "main", "develop", "feature/consumer-backend-dockerfile" ]
 
     # Publish semver tags as releases.
     # tags: [ 'v*.*.*' ]
@@ -16,6 +16,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: "consumer-ui"
+  CONSUMER_BACKEND_IMAGE_NAME: "consumer-backend"
   IMAGE_TAG: ${{ github.sha }}
     
 jobs:
@@ -47,3 +48,11 @@ jobs:
         with:
           push: true
           tags: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+
+      - name: Build and push
+        id: build-and-push-frontend
+        uses: docker/build-push-action@v3
+        with:
+          context: consumer-backend/materialpass
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.CONSUMER_BACKEND_IMAGE_NAME }}:${{ env.IMAGE_TAG }}
