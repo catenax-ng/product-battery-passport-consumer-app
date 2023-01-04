@@ -50,7 +50,7 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
       - name: Build and push
-        id: build-and-push-frontend
+        id: build-and-push-backend
         uses: docker/build-push-action@v3
         with:
           context: consumer-backend/materialpass
