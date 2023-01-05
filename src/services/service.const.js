@@ -33,18 +33,18 @@ if (window.location.href.includes(INT_SERVER_URL)) { // for integration
 }
 else if (window.location.href.includes(DEV_SERVER_URL)) { // for development
   REDIRECT_URI = DEV_SERVER_URL;
-  SERVER_URL = DEV_SERVER_URL;
+  SERVER_URL = INT_SERVER_URL; // this server url should come from DEV. Because DEV is not working at the moment, we use INT Server for testing purpose. Once, DEV is up and running, we change this to DEV.  
 }
-// else if (window.location.href.includes("http://localhost")) { // for local run
-//   INIT_OPTIONS = {
-//     url: 'http://localhost:8088/auth/',
-//     clientId: 'Cl13-CX-Battery',
-//     realm: 'CX-Central',
-//     onLoad: 'login-required'
-//   };
-//   REDIRECT_URI = "http://localhost:8080/";
-//   SERVER_URL = INT_SERVER_URL; // this server url should come from DEV. Because DEV is not working at the moment, we use INT Server for testing purpose. Once, DEV is up and running, we change this to DEV.  
-// }
+else if (window.location.href.includes("http://localhost")) { // for local run
+  INIT_OPTIONS = {
+    url: 'http://localhost:8088/auth/',
+    clientId: 'Cl13-CX-Battery',
+    realm: 'CX-Central',
+    onLoad: 'login-required'
+  };
+  REDIRECT_URI = "http://localhost:8080/";
+  SERVER_URL = INT_SERVER_URL; // this server url should come from DEV. Because DEV is not working at the moment, we use INT Server for testing purpose. Once, DEV is up and running, we change this to DEV.  
+}
 console.log("Redirect URI: " + REDIRECT_URI);
 console.log("Server URL: " + SERVER_URL);
 
