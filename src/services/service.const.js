@@ -27,13 +27,15 @@ INIT_OPTIONS = {
   realm: 'CX-Central',
   onLoad: 'login-required'
 };
-if (window.location.href.includes("materialpass.int.demo.catena-x.net")) { // for integration
+if (window.location.href.includes(INT_SERVER_URL)) { // for integration
   REDIRECT_URI = INT_SERVER_URL;
+  SERVER_URL = INT_SERVER_URL;
 }
-else if (window.location.href.includes("materialpass.dev.demo.catena-x.net")) { // for development
+else if (window.location.href.includes(DEV_SERVER_URL)) { // for development
   REDIRECT_URI = DEV_SERVER_URL;
+  SERVER_URL = DEV_SERVER_URL;
 }
-else { // for local run
+else if (window.location.href.includes("http://localhost")) { // for local run
   INIT_OPTIONS = {
     url: 'http://localhost:8088/auth/',
     clientId: 'Cl13-CX-Battery',
@@ -43,6 +45,8 @@ else { // for local run
   REDIRECT_URI = "http://localhost:8080/";
   SERVER_URL = INT_SERVER_URL; // this server url should come from DEV. Because DEV is not working at the moment, we use INT Server for testing purpose. Once, DEV is up and running, we change this to DEV.  
 }
+console.log("Redirect URI: " + REDIRECT_URI);
+console.log("Server URL: " + SERVER_URL);
 
 export {TWIN_REGISTRY_URL, AAS_PROXY_URL, MOCK_AUTH_URL, GOOGLE_CHART_API_URL, DUMMY_SERVICE, INIT_OPTIONS, REDIRECT_URI, CX_REGISTRY_URL, SERVER_URL, API_KEY, CLIENT_CREDENTIALS, IDP_URL};
 
