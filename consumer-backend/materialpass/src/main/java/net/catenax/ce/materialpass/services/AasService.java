@@ -155,7 +155,6 @@ public class AasService {
                     "It was not possible to get subModel!");
         }
     }
-
     public ArrayList<String> queryDigitalTwin(String assetType,String assetId) {
         try {
             String path = "/registry/lookup/shells";
@@ -168,15 +167,13 @@ public class AasService {
             JwtToken token = authService.getToken();
             HttpHeaders headers = httpTools.getHeadersWithToken(token.getAccessToken());
             String jsonString = jsonTools.dumpJson(new JSONObject(assetIds),0);
-            ArrayList<String> jsonArray = new ArrayList<>();
-            jsonArray.add(jsonString);
-            params.put("assetIds",jsonArray);
-            ResponseEntity<Object> response = httpTools.doGet(url, String.class, headers, params, false, false);
+            params.put("assetIds", jsonString);
+            ResponseEntity<Object> response = httpTools.doGet(url, ArrayList.class, headers, params, false, false);
             ArrayList<String> responseBody = (ArrayList) response.getBody();
             return responseBody;
 
         } catch (Exception e) {
-            throw new ServiceException(this.getClass().getName() + "." + "queryDigitalTwin",
+            throw new ServiceException(this.getClass().getName() + "." + "queryDigitalTwinString",
                     e,
                     "It was not possible to retrieve shell");
         }
