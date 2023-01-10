@@ -16,7 +16,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: "consumer-ui"
-  CONSUMER_BACKEND_IMAGE_NAME: "consumer-backend"
+  CONSUMER_BACKEND_IMAGE_NAME: "product-pass-consumer-backend"
   IMAGE_TAG: ${{ github.sha }}
   JAVA_VERSION: 17
     
