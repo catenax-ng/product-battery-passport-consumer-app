@@ -6,7 +6,7 @@ replicaCount: 1
 namespace: product-material-pass
 
 image:
-  repository: ghcr.io/catenax-ng/product-battery-passport-consumer-app
+  repository: ghcr.io/catenax-ng/product-battery-passport-consumer-app/product-pass-consumer-backend
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: placeholder
@@ -46,27 +46,34 @@ avp:
     clientSecret: <path:material-pass/data/dev/aasregistry#client.secret>
     xApiKey: <path:material-pass/data/dev/edc/oauth#api.key>
 
+persistence:
+  enabled: true
+  accessModes:
+    - ReadWriteOnce
+  mode: Filesystem
+  class: default-retain
+  size: 1Gi
+
 # persistent volume claim
 volumes:
   - name: data
     persistentVolumeClaim:
-      claimName: backend-storage
-  - name: log
-    persistentVolumeClaim:
-      claimName: backend-storage
-  - name: tmp
-    persistentVolumeClaim:
-      claimName: backend-storage
+      claimName: backend-service
+  # - name: log
+  #   persistentVolumeClaim:
+  #     claimName: backend-service
+  # - name: tmp
+  #   persistentVolumeClaim:
+  #     claimName: backend-service
 
 # volume mounted inside container
 volumeMounts:
   - name: data
     mountPath: /app/data/
-  - name: log
-    mountPath: /app/log/
-  - name: tmp
-    mountPath: /app/tmp/
-  
+  # - name: log
+  #   mountPath: /app/log/
+  # - name: tmp
+  #   mountPath: /app/tmp/  
 
 
 resources: {}

@@ -1,12 +1,19 @@
-apiVersion: v1
+{{- if .Values.persistence.enabled }}
 kind: PersistentVolumeClaim
+apiVersion: v1
 metadata:
-  name: backend-storage
-  namespace: product-material-pass
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
 spec:
-  storageClassName: default
   accessModes:
-    - ReadWriteOnce
+    {{- range .Values.persistence.accessModes }}
+    - {{ . | quote }}
+    {{- end }}
+  volumeMode: {{ .Values.persistence.mode }}
+  {{- if .Values.persistence.class }}
+  storageClassName: {{ .Values.persistence.class }}
+  {{- end }}
   resources:
     requests:
-      storage: 1Gi
+      storage: {{ .Values.persistence.size }}
+{{- end }}
