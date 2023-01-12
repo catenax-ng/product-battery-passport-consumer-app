@@ -46,6 +46,29 @@ avp:
     clientSecret: <path:material-pass/data/dev/aasregistry#client.secret>
     xApiKey: <path:material-pass/data/dev/edc/oauth#api.key>
 
+# persistent volume claim
+volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: backend-storage
+  - name: log
+    persistentVolumeClaim:
+      claimName: backend-storage
+  - name: tmp
+    persistentVolumeClaim:
+      claimName: backend-storage
+
+# volume mounted inside container
+volumeMounts:
+  - name: data
+    mountPath: /app/data/
+  - name: log
+    mountPath: /app/log/
+  - name: tmp
+    mountPath: /app/tmp/
+  
+
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
