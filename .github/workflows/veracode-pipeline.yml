@@ -33,7 +33,7 @@ jobs:
       with:
         java-version: 8
         distribution: 'temurin'
-    - run: java -jar pipeline-scan.jar -p "Product-Battery-Pass-Consumer-App" --veracode_api_id "${{secrets.ORG_VERACODE_API_ID}}" --veracode_api_key "${{secrets.ORG_VERACODE_API_KEY}}" --fail_on_severity="Very High, High" --file veracode-scan-target.zip
+    - run: java -jar pipeline-scan.jar -p "Product-Battery-Pass-Consumer-App" --veracode_api_id "${{secrets.ORG_VERACODE_API_ID}}" --veracode_api_key "${{secrets.ORG_VERACODE_API_KEY}}" --fail_on_severity="Very High, High" --file veracode-scan-target.zip –recursive 
       continue-on-error: true
     - name: Convert pipeline scan output to SARIF format
       id: convert
