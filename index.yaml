@@ -3,6 +3,16 @@ entries:
   consumer-backend:
   - apiVersion: v2
     appVersion: 0.4.2
+    created: "2023-02-03T13:40:27.191393044Z"
+    description: A Helm chart for Kubernetes
+    digest: 9efbd4b7c647ced86f78b873b44c3c608151d04b51426a7d7c4e4709feee82fe
+    name: consumer-backend
+    type: application
+    urls:
+    - https://github.com/catenax-ng/product-battery-passport-consumer-app/releases/download/consumer-backend-0.1.2/consumer-backend-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.4.2
     created: "2023-02-03T11:20:52.426453355Z"
     description: A Helm chart for Kubernetes
     digest: 0ca620681ce129b33e009a200e713ef56d998b98674bfd035ff4f4ebee9d302d
@@ -12,6 +22,16 @@ entries:
     - https://github.com/catenax-ng/product-battery-passport-consumer-app/releases/download/consumer-backend-0.1.1/consumer-backend-0.1.1.tgz
     version: 0.1.1
   consumer-ui:
+  - apiVersion: v2
+    appVersion: 0.4.2
+    created: "2023-02-03T13:40:27.321579464Z"
+    description: A Helm chart for Kubernetes
+    digest: 0206367eda8732c0b709a965923b8b219a70452b1de74a7ac192be2a44deeeb3
+    name: consumer-ui
+    type: application
+    urls:
+    - https://github.com/catenax-ng/product-battery-passport-consumer-app/releases/download/consumer-ui-0.1.2/consumer-ui-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v2
     appVersion: 0.4.2
     created: "2023-02-03T11:20:52.551915693Z"
@@ -85,4 +105,4 @@ entries:
     urls:
     - https://github.com/catenax-ng/product-battery-passport-consumer-app/releases/download/edc-0.0.2/edc-0.0.2.tgz
     version: 0.0.2
-generated: "2023-02-03T11:20:52.867470309Z"
+generated: "2023-02-03T13:40:27.321590464Z"
