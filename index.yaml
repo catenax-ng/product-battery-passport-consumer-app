@@ -3,6 +3,16 @@ entries:
   consumer-backend:
   - apiVersion: v2
     appVersion: 0.4.2
+    created: "2023-02-03T17:28:50.285420625Z"
+    description: Consumer Backend Helm Deployment for the Product Passport Application
+    digest: d9673dd9efb9f6c0957aa333ecfbe71cdd4637822d339aba70de0ea8ef13adac
+    name: consumer-backend
+    type: application
+    urls:
+    - https://github.com/catenax-ng/product-battery-passport-consumer-app/releases/download/consumer-backend-0.1.5/consumer-backend-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
+    appVersion: 0.4.2
     created: "2023-02-03T16:45:16.700011596Z"
     description: Consumer Backend Helm Deployment for the Product Passport Application
     digest: 98f33bf528cb5fce5aaf7ecdb465ae72be87ff29a6b1b02b838d5b1e415d7677
@@ -42,6 +52,16 @@ entries:
     - https://github.com/catenax-ng/product-battery-passport-consumer-app/releases/download/consumer-backend-0.1.1/consumer-backend-0.1.1.tgz
     version: 0.1.1
   consumer-ui:
+  - apiVersion: v2
+    appVersion: 0.4.2
+    created: "2023-02-03T17:28:50.472306703Z"
+    description: Consumer Frontend Helm Deployment for the Product Passport Application
+    digest: 77094aa977cc059436af46a158aee1bb4de3e450a28ade038c640e97d52d1000
+    name: consumer-ui
+    type: application
+    urls:
+    - https://github.com/catenax-ng/product-battery-passport-consumer-app/releases/download/consumer-ui-0.1.5/consumer-ui-0.1.5.tgz
+    version: 0.1.5
   - apiVersion: v2
     appVersion: 0.4.2
     created: "2023-02-03T16:45:16.88200044Z"
@@ -145,4 +165,4 @@ entries:
     urls:
     - https://github.com/catenax-ng/product-battery-passport-consumer-app/releases/download/edc-0.0.2/edc-0.0.2.tgz
     version: 0.0.2
-generated: "2023-02-03T16:45:16.88203494Z"
+generated: "2023-02-03T17:28:50.472338803Z"
