@@ -49,9 +49,11 @@ public class ErrorResponseController implements ErrorController {
     @Autowired
     private ErrorAttributes errorAttributes;
 
+    @Autowired
+    private HttpServletRequest request;
     @RequestMapping(value="/error",  method = {RequestMethod.GET})
     @ResponseBody
-    public Response handleError(HttpServletRequest httpRequest) {
+    public Response handleError(jakarta.servlet.http.HttpServletRequest httpRequest) {
         ErrorAttributeOptions options = ErrorAttributeOptions
                 .defaults()
                 .including(ErrorAttributeOptions.Include.MESSAGE)
@@ -59,7 +61,7 @@ public class ErrorResponseController implements ErrorController {
         ServletWebRequest servletWebRequest = new ServletWebRequest(httpRequest);
         Map<String, Object> errors = this.errorAttributes.getErrorAttributes(servletWebRequest, options);
         Response response = new Response().mapError(errors);
-        String httpInfo = HttpUtil.getHttpInfo(httpRequest, response.getStatus());
+        String httpInfo = HttpUtil.getHttpInfo(request, response.getStatus());
         LogUtil.printHTTPMessage(httpInfo + " " + response.errorString());
         return response;
     }
