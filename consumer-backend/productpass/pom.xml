@@ -30,12 +30,12 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.5</version>
+		<version>2.7.8</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.eclipse.tractusx</groupId>
 	<artifactId>productpass</artifactId>
-	<version>0.2.9-SNAPSHOT</version>
+    <version>0.3.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 	<name>Catena-X Product Passport Consumer Backend</name>
 	<description>Product Passport Consumer Backend System for Product Passport Consumer Frontend Application</description>
@@ -60,6 +60,7 @@
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
+            <version>1.33</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -115,6 +116,7 @@
        <dependency>
            <groupId>org.springframework.boot</groupId>
            <artifactId>spring-boot-starter-security</artifactId>
+           <version>3.0.2</version>
        </dependency>
        <dependency>
            <groupId>org.sonarsource.scanner.maven</groupId>
@@ -206,6 +208,7 @@
                     <execution>
                         <id>build-info</id>
                         <goals>
+                            <goal>repackage</goal>
                             <goal>build-info</goal>
                         </goals>
                     </execution>
