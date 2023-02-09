@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { SERVER_URL, BACKEND } from "@/services/service.const";
+import { SERVER_URL, BACKEND, API_DELAY, API_MAX_RETRIES } from "@/services/service.const";
 import axios from "axios";
-
+import backendService from "@/services/BackendService";
 export default class Wrapper {
 
   // Step 1: Request contract offers from the catalog
@@ -62,12 +62,12 @@ export default class Wrapper {
         }
       }
     };
-
     return new Promise(resolve => {
 
       axios.post(`${SERVER_URL}/consumer/data/contractnegotiations`, requestBody, {
         headers: requestHeaders
-      })
+      }
+      )
         .then((response) => {
           resolve(response.data);
         })
@@ -84,11 +84,9 @@ export default class Wrapper {
       setTimeout(() => {
         axios.get(`${SERVER_URL}/consumer/data/contractnegotiations/${uuid}`, {
           headers: requestHeaders
-        })
+        }
+        )
           .then((response) => {
-            console.log('check_state : ' + response.data.state);
-            console.log('Agreement Id: ' + response.data.contractAgreementId);
-            console.log('Agreement state: ' + response.data.state);
             resolve(response.data);
           })
           .catch((e) => {
@@ -97,7 +95,7 @@ export default class Wrapper {
             resolve('rejected');
           });
         ;
-      }, 5000);
+      }, API_DELAY);
 
     });
   }
@@ -105,10 +103,10 @@ export default class Wrapper {
   initiateTransfer(assetId, requestHeaders, payload) {
 
     let requestBody = {
-      "id": payload.transferProcessId,
+      "id": payload.id,
       "connectorId": payload.connectorId,
       "connectorAddress": payload.connectorAddress,
-      "contractId": payload.contractAgreementId,
+      "contractId": payload.contractId,
       "assetId": assetId,
       "managedResources": false,
       "dataDestination": {
@@ -116,12 +114,11 @@ export default class Wrapper {
       },
     };
     return new Promise(resolve => {
-      console.log(requestBody);
       axios.post(`${SERVER_URL}/consumer/data/transferprocess`, requestBody, {
         headers: requestHeaders
-      })
+      }
+      )
         .then((response) => {
-          console.log(response.data);
           resolve(response.data);
         })
         .catch((e) => {
@@ -137,21 +134,20 @@ export default class Wrapper {
       setTimeout(() => {
         axios.get(`${SERVER_URL}/consumer/data/transferprocess/${transferId}`, {
           headers: requestHeaders
-        })
+        }
+        )
           .then((response) => {
-            console.log(response.data);
             resolve(response.data);
           })
           .catch((e) => {
             console.error("getTransferProcessById -> " + e);
             resolve('rejected');
           });
-      }, 5000);
+      }, API_DELAY);
     });
   }
   // Step 4.3: Query transferred data from consumer backend system
   getDataFromConsumerBackend(transferProcessId) {
-
     return new Promise(resolve => {
 
       setTimeout(() => {
@@ -159,43 +155,21 @@ export default class Wrapper {
           headers: {
             'Accept': 'application/octet-stream'
           }
-        })
+        }
+        )
           .then((response) => {
-            console.log(response.data);
             resolve(response.data);
           })
           .catch((e) => {
             console.error("getDataFromConsumerBackend -> " + e);
-            resolve('rejected');
+            resolve(null);
           });
-        ;
-      }, 5000);
-    });
-  }
-  async getPassportV1(assetId){
-    return new Promise(resolve => {
-
-      setTimeout(() => {
-        axios.get(`${SERVER_URL}/api/passport/v1/${assetId}`, {
-          headers: {
-            'Accept': 'application/json'
-          }
-        })
-          .then((response) => {
-            console.log(response.data);
-            resolve(response.data);
-          })
-          .catch((e) => {
-            console.error("getPassportV1 -> " + e);
-            resolve('rejected');
-          });
-        ;
       }, 5000);
     });
   }
   async performEDCDataTransfer(assetId, providerConnector, requestHeaders) {
-    if(BACKEND === true){
-      return await this.getPassportV1(assetId);
+    if((BACKEND === 'true') || (BACKEND == true)){
+      return await backendService.getPassportV1(assetId);
     }else{
       let contractId = "";
       let data = await this.getContractOfferCatalog(providerConnector.connectorAddress, requestHeaders);
@@ -211,7 +185,6 @@ export default class Wrapper {
         connectorId: providerConnector.idShort,
         contractOffer: contractOffer[0]
       };
-      console.log(payload);
       let negotiation = await this.doContractNegotiation(payload, requestHeaders);
       console.log("Negotiation ID: " + negotiation.id);
 
@@ -228,10 +201,10 @@ export default class Wrapper {
 
       // initiate data transfer
       const transferRequest = {
-        transferProcessId: Date.now(),
+        id: Date.now(),
         connectorId: providerConnector.idShort,
         connectorAddress: providerConnector.connectorAddress,
-        contractAgreementId: contractId,
+        contractId: contractId,
         assetId: assetId,
         type: "HttpProxy"
       };
@@ -245,8 +218,28 @@ export default class Wrapper {
         result = await this.getTransferProcessById(transfer.id, requestHeaders);
         console.log("Transfer state:  ", result.type + '_' + result.state);
       }
+      let tmpPassport = null;
+      let retries = 0;
       
-      const passport = await this.getDataFromConsumerBackend(transferRequest.transferProcessId);
+      const transferRequestId = transferRequest.id;
+      // Get passport or retry
+      while (retries < API_MAX_RETRIES) {
+        try{
+          tmpPassport = await this.getDataFromConsumerBackend(transferRequestId);
+          if(tmpPassport && tmpPassport != null){
+            break;
+          }
+        }catch(e){
+          // Do nothing
+        }
+        retries++;
+        console.log("Retrying "+retries + "# from " + API_MAX_RETRIES+ "to get passport with transferId ["+transferRequestId+"]");
+      }
+      if(!tmpPassport || tmpPassport == null){
+        return null;
+      }
+      const passport = tmpPassport;
+
       const responseData = {
         "data":{
           "metadata": {

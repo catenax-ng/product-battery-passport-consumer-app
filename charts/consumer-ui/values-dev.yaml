@@ -34,7 +34,14 @@ ingress:
 
 avp:
   helm:
-    backend: false
     clientId: <path:material-pass/data/dev/aasregistry#client.id>
     clientSecret: <path:material-pass/data/dev/aasregistry#client.secret>
     xApiKey: <path:material-pass/data/dev/edc/oauth#api.key>
+
+# Product Passport UI Configuration
+productpass:
+  backend: false
+  api:
+    max_retries: 5 # Max Retries for getting passport transfer
+    timeout: 60000 # 45 seconds in milliseconds
+    delay: 2000 # 5 seconds in milliseconds
