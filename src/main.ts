@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-/**
- * plugins/webfontloader.js
- *
- * webfontloader documentation: https://github.com/typekit/webfontloader
- */
+import { createApp } from 'vue';
+import App from './App.vue';
+import store from './store';
+import vuetify from './plugins/vuetify';
+import { loadFonts } from './plugins/webfontloader';
+import router from './router';
+import authentication from '@/services/Authentication.js';
 
-export async function loadFonts () {
-  const webFontLoader = await import(/* webpackChunkName: "webfontloader" */'webfontloader');
+loadFonts();
 
-  webFontLoader.load({
-    google: {
-      families: ['Roboto:100,300,400,500,700,900&display=swap'],
-    },
-  });
-}
+const app = createApp(App);
+app.use(vuetify);
+app.use(store);
+app.use(router);
+
+const auth = new authentication();
+app.provide('authentication', auth);
+auth.keycloakInit(app);

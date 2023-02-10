@@ -95,7 +95,7 @@ export default class Wrapper {
             alert(e);
             resolve('rejected');
           });
-        ;
+        
       }, API_DELAY);
 
     });
