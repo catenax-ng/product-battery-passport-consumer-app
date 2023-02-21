@@ -34,8 +34,4 @@ RUN chown -R appuser:appuser /app && chmod -R 755 /app
 USER appuser
 EXPOSE 8080
 
-<<<<<<< HEAD
-ENTRYPOINT ["java", "-jar", "./productpass-0.3.4-SNAPSHOT.jar"]
-=======
 ENTRYPOINT ["java", "-jar", "./productpass.jar"]
->>>>>>> d4ccbe26ca0330afb6196f69d07778cf3c0555a6
