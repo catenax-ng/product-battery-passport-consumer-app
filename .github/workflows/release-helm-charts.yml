@@ -23,6 +23,7 @@ on:
       - 'charts/**'
     branches:
       - main
+      - release/v0.4.4
 jobs:
   release:
     permissions:
